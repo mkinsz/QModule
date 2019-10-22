@@ -41,7 +41,7 @@ void MaskedMouseArea::setMaskSource(const QUrl &source)
 
 void MaskedMouseArea::setAlphaThreshold(qreal threshold)
 {
-    if (m_alphaThreshold != threshold) {
+    if (std::fabs(m_alphaThreshold - threshold) > std::numeric_limits<double>::epsilon()) {
         m_alphaThreshold = threshold;
         emit alphaThresholdChanged();
     }
@@ -58,7 +58,7 @@ bool MaskedMouseArea::contains(const QPointF &point) const
         p.y() < 0 || p.y() >= m_maskImage.height())
         return false;
 
-    qreal r = qBound<int>(0, m_alphaThreshold * 255, 255);
+    qreal r = qBound<int>(0, static_cast<const int>(m_alphaThreshold * 255), 255);
     return qAlpha(m_maskImage.pixel(p)) > r;
 }
 
@@ -67,6 +67,8 @@ void MaskedMouseArea::mousePressEvent(QMouseEvent *event)
     setPressed(true);
     m_pressPoint = event->pos();
     emit pressed();
+
+    event->accept();
 }
 
 void MaskedMouseArea::mouseReleaseEvent(QMouseEvent *event)
@@ -80,6 +82,8 @@ void MaskedMouseArea::mouseReleaseEvent(QMouseEvent *event)
 
     if (isClick)
         emit clicked();
+
+    event->accept();
 }
 
 void MaskedMouseArea::mouseUngrabEvent()
@@ -90,12 +94,16 @@ void MaskedMouseArea::mouseUngrabEvent()
 
 void MaskedMouseArea::hoverEnterEvent(QHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     setContainsMouse(true);
+
+    event->accept();
 }
 
 void MaskedMouseArea::hoverLeaveEvent(QHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     setContainsMouse(false);
+
+    event->accept();
 }
