@@ -10,9 +10,7 @@ Item {
          currentIndex: bar.currentIndex
          Item {
              id: maskedTab
-             Masked {
-                anchors.centerIn: parent
-             }
+
          }
      }
 

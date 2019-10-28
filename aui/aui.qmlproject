@@ -15,6 +15,11 @@ Project {
     ImageFiles {
         directory: "."
     }
+    Files{
+        filter: '*.conf'
+        directory: '.'
+    }
+
     /* List of plugin directories passed to QML runtime */
-     importPaths: [ "../import" ]
+     importPaths: [ "./import" ]
 }
