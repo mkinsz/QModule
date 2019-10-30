@@ -1,5 +1,31 @@
 <RCC>
     <qresource prefix="/">
         <file>style.css</file>
+        <file>ultrasound/a.pgm</file>
+        <file>ultrasound/b.pgm</file>
+        <file>ultrasound/c.dat</file>
+        <file>navigation/config.xml</file>
+        <file>treeview/arrowBottom.png</file>
+        <file>treeview/arrowBottomHover.png</file>
+        <file>treeview/arrowLeft.png</file>
+        <file>treeview/arrowLeftHover.png</file>
+        <file>treeview/arrowRight.png</file>
+        <file>treeview/arrowRightHover.png</file>
+        <file>treeview/arrowTop.png</file>
+        <file>treeview/arrowTopHover.png</file>
+        <file>treeview/branchClose.png</file>
+        <file>treeview/branchOpen.png</file>
+        <file>treeview/config.xml</file>
+        <file>resources/run.png</file>
+        <file>resources/stone.ico</file>
+        <file>resources/icon.ico</file>
+        <file>resources/icon.png</file>
+        <file>resources/home.png</file>
+        <file>resources/home2.png</file>
+        <file>resources/menu.png</file>
+        <file>resources/message.png</file>
+        <file>component/search.png</file>
+        <file>component/search_dark.png</file>
+        <file>resources/config.xml</file>
     </qresource>
 </RCC>

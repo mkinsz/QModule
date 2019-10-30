@@ -1,0 +1,6 @@
+@echo off
+echo ImageMagick fix libpng warning: iCCP: Not recognizing known sRGB profile ......
+echo Search PNG in subdirs and process ...
+set fn=C:\Program Files (x86)\ImageMagick-6.2.7-Q16\convert.exe
+for /f "tokens=*" %%i in (*.png) do "%fn%" "%%i" -strip "%%i"
+pause

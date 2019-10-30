@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,14 +16,32 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    components.cpp \
+    curvecharttest.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    navigationtest.cpp \
+    progressbartest.cpp \
+    siderbartest.cpp \
+    treeviewtest.cpp \
+    treeviewtest.cpp
 
 HEADERS += \
-    mainwindow.h
+    components.h \
+    curvecharttest.h \
+    mainwindow.h \
+    navigationtest.h \
+    progressbartest.h \
+    siderbartest.h \
+    treeviewtest.h
 
 FORMS += \
-    mainwindow.ui
+    components.ui \
+    curvecharttest.ui \
+    mainwindow.ui \
+    navigationtest.ui \
+    progressbartest.ui \
+    siderbartest.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -32,3 +50,22 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+
+#CONFIG += release
+#MOC_DIR = temp/moc
+#RCC_DIR = temp/rcc
+#UI_DIR = temp/ui
+#OBJECTS_DIR = temp/obj
+#DESTDIR = bin
+
+include(curvechart/curvechart.pri)
+include(polygon/cpolygon.pri)
+include(ultrasound/ultrasound.pri)
+include(keyboard/keyboard.pri)
+include(progressbar/progressbar.pri)
+include(siderbar/siderbar.pri)
+include(navigation/navigation.pri)
+include(treeview/treeview.pri)
+include(msgnotify/msgnotify.pri)
+include(combobox/combobox.pri)
+include(component/component.pri)

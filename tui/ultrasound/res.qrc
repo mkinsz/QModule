@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>a.pgm</file>
+        <file>b.pgm</file>
+        <file>c.dat</file>
+    </qresource>
+</RCC>
