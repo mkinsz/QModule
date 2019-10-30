@@ -1,7 +1,7 @@
 INCLUDEPATH += $$PWD
 
 HEADERS  += \
-    $$PWD/combobox.h
+    $$PWD/expander.h
 
 SOURCES += \
-    $$PWD/combobox.cpp
+    $$PWD/expander.cpp

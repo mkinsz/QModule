@@ -27,5 +27,7 @@
         <file>component/search.png</file>
         <file>component/search_dark.png</file>
         <file>resources/config.xml</file>
+        <file>expander/arrow.png</file>
+        <file>expander/arrow-expanded.png</file>
     </qresource>
 </RCC>
