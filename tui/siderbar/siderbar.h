@@ -2,7 +2,7 @@
 #define SLIDENAVATION_H
 
 #include <QWidget>
-#include <QMap>
+#include <QVector>
 
 #ifdef MSC
 #if (QT_VERSION < QT_VERSION_CHECK(5, 7, 0))
@@ -16,11 +16,11 @@ class SiderBar : public QWidget
 #endif
 {
     Q_OBJECT
-    Q_PROPERTY(SiderBar::ItemLineStyle ItemLineStyle READ getItemLineStyle WRITE setItemLineStyle)
+    Q_PROPERTY(SiderBar::LineStyle LineStyle READ getLineStyle WRITE setLineStyle)
     Q_PROPERTY(QStringList Items READ getItems WRITE addItems)
-    Q_PROPERTY(int CurrentItemIndex READ getCurrentItemIndex WRITE setCurrentItemIndex)
+    Q_PROPERTY(int CurrentIndex READ getCurrentIndex WRITE setCurrentIndex)
 public:
-    enum ItemLineStyle
+    enum LineStyle
     {
         None,       //不显示
         ItemTop,    //上方
@@ -42,17 +42,16 @@ public:
     void setItemColor(const QColor color);
     void setItemColor(const QColor bColor, const QColor eColor);
 
-    void setItemTextColor(QColor color);
-    void setItemLineColor(QColor color);
-    void setBarRadious(uint radious);
-    void setItemRadious(uint radious);
-    void setSpace(uint space);
-    void setItemLineWidth(uint width);
-    ItemLineStyle getItemLineStyle() const { return m_itemLineStyle; }
-    void setItemLineStyle(ItemLineStyle style);
+    void setTextColor(QColor color);
+    void setLineColor(QColor color);
+    void setBarRadius(int radius);
+    void setItemRadius(int radius);
+    void setSpace(int space);
+    void setLineWidth(int width);
+    LineStyle getLineStyle() const { return m_lineStyle; }
+    void setLineStyle(LineStyle style);
     void setOrientation(Qt::Orientation orientation);
-    void setFixed(bool fixed);
-    int getCurrentItemIndex() const { return m_currentItemIndex; }
+    int getCurrentIndex() const { return m_currentIndex; }
 
 signals:
     void itemClicked(int index, QString str);
@@ -66,7 +65,7 @@ public slots:
     void moveTo(int index);
     void moveTo(const QString str);
     void moveTo(const QPointF point);
-    void setCurrentItemIndex(int index) { moveTo(index); }
+    void setCurrentIndex(int index) { moveTo(index); }
 
 protected:
     void paintEvent(QPaintEvent *) override;
@@ -88,21 +87,19 @@ private:
     QColor m_barEndColor;
     QColor m_itemStartColor; //Item颜色
     QColor m_itemEndColor;
-    QColor m_itemTextColor;        //Item文字颜色
-    QColor m_itemLineColor;        //Item线条指示器颜色
-    uint m_barRadious;             //边框圆角
-    uint m_itemRadious;            //Item圆角
-    uint m_space;                  //Item间隔
-    uint m_itemLineWidth;          //Item线条宽度
-    ItemLineStyle m_itemLineStyle; //Item线条类型
+    QColor m_textColor;        //Item文字颜色
+    QColor m_lineColor;        //Item线条指示器颜色
+    int m_barRadious;              //边框圆角
+    int m_itemRadious;             //Item圆角
+    int m_space;                   //Item间隔
+    int m_lineWidth;           //Item线条宽度
+    LineStyle m_lineStyle; //Item线条类型
     Qt::Orientation m_orientation; //导航方向
     bool m_bKeyMove;               //按键移动
-    bool m_bFixed;                 //固定大小
 
-    QMap<int, QPair<QString, QRectF>> m_itemList;
-    uint m_totalTextWidth; //文字总长度,resize时重新计算每个Item的RectF
-    uint m_totalTextHeight;
-    int m_currentItemIndex; //当前选中item
+    QVector<QPair<QString, QRectF>> m_items;
+
+    int m_currentIndex;     //当前选中item
     QRectF m_startRect;     //移动开始
     QRectF m_stopRect;      //移动结束
     QTimer *m_slideTimer;   //移动定时器

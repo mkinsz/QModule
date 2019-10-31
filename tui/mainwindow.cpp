@@ -77,7 +77,8 @@ void MainWindow::onClicked(const QModelIndex &index)
         m_pMedium = nullptr;
     }
 
-    m_pMedium = new Components(m_pContent);
+//    m_pMedium = new Components(m_pContent);
+    m_pMedium = new SiderBarTest(m_pContent);
 
     if (m_pMedium)
         m_pContent->layout()->addWidget(m_pMedium);

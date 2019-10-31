@@ -13,26 +13,22 @@ SiderBar::SiderBar(QWidget *parent)
     m_barEndColor = QColor(78, 78, 78);
     m_itemStartColor = QColor(46, 132, 243);
     m_itemEndColor = QColor(39, 110, 203);
-    m_itemTextColor = Qt::white;
-    m_itemLineColor = QColor(255, 107, 107);
+    m_textColor = Qt::white;
+    m_lineColor = QColor(255, 107, 107);
     m_barRadious = 0;
     m_itemRadious = 0;
-    m_space = 25;
-    m_itemLineWidth = 3;
-    m_itemLineStyle = ItemLineStyle::None;
+    m_space = 15;
+    m_lineWidth = 3;
+    m_lineStyle = LineStyle::None;
     m_orientation = Qt::Horizontal;
     m_bKeyMove = false;
-    m_totalTextWidth = 0;
-    m_totalTextHeight = 0;
-    m_currentItemIndex = -1;
-    m_bFixed = false;
+    m_currentIndex = -1;
 
-    setAttribute(Qt::WA_TranslucentBackground);
     m_slideTimer = new QTimer(this);
-    m_slideTimer->setInterval(10);
+    m_slideTimer->setInterval(5);
     connect(m_slideTimer, SIGNAL(timeout()), this, SLOT(doSlide()));
     m_shakeTimer = new QTimer(this);
-    m_shakeTimer->setInterval(10);
+    m_shakeTimer->setInterval(5);
     connect(m_shakeTimer, SIGNAL(timeout()), this, SLOT(doShake()));
     setFocusPolicy(Qt::ClickFocus);
 }
@@ -45,63 +41,10 @@ void SiderBar::addItem(const QString &item)
 {
     if (item.isEmpty()) return;
 
-    QMap<int, QPair<QString, QRectF>>::iterator it = m_itemList.begin();
-    while (it != m_itemList.end())
-    {
-        QPair<QString, QRectF> &itemData = it.value();
-        if (item == itemData.first)
-            return;
-        ++it;
-    }
+    foreach (auto i, m_items)
+        if (item == i.first) return;
 
-    QFont f = font();
-    QFontMetrics fm(f);
-    int textWidth = fm.horizontalAdvance(item);
-    int textHeight = fm.height();
-    int itemCount = m_itemList.size();
-    if (itemCount > 0)
-    {
-        QPointF topLeft, bottomRight;
-        if (m_orientation == Qt::Horizontal)
-        {
-            topLeft = QPointF(m_totalTextWidth, 0);
-            m_totalTextWidth += textWidth + m_space;
-            bottomRight = QPointF(m_totalTextWidth, m_totalTextHeight);
-        }
-        else
-        {
-            topLeft = QPointF(0, m_totalTextHeight);
-            m_totalTextHeight += textHeight + m_space;
-            bottomRight = QPointF(m_totalTextWidth, m_totalTextHeight);
-        }
-        QRectF textRect(topLeft, bottomRight);
-        m_itemList.insert(itemCount, qMakePair(item, textRect));
-    }
-    else
-    {
-        if (m_orientation == Qt::Horizontal)
-        {
-            m_totalTextWidth = textWidth + m_space;
-            m_totalTextHeight = textHeight + m_space; //水平方向,水平占1个m_space,竖直占1个m_space
-        }
-        else
-        {
-            m_totalTextWidth = textWidth + 2 * m_space; //竖直方向,水平占2个m_space,竖直占1个m_space
-            m_totalTextHeight = textHeight + m_space;
-        }
-        QPointF topLeft(0.0, 0.0);
-        QPointF bottomRight(m_totalTextWidth, m_totalTextHeight);
-        QRectF textRect(topLeft, bottomRight);
-        m_itemList.insert(itemCount, qMakePair(item, textRect));
-    }
-    setMinimumSize(m_totalTextWidth, m_totalTextHeight);
-    if (m_bFixed)
-    {
-        if (m_orientation == Qt::Horizontal)
-            setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed); //固定高度
-        else
-            setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred); //固定宽度
-    }
+    m_items.append(qMakePair(item, QRectF()));
     update();
 }
 
@@ -114,10 +57,8 @@ void SiderBar::addItems(const QStringList &items)
 QStringList SiderBar::getItems() const
 {
     QStringList items;
-
-    QMap<int, QPair<QString, QRectF>>::const_iterator it = m_itemList.begin();
-    for (; it != m_itemList.end(); ++it)
-        items.append(it.value().first);
+    foreach (auto item, m_items)
+        items.append(item.first);
 
     return items;
 }
@@ -133,10 +74,10 @@ void SiderBar::setBarColor(const QColor color)
 
 void SiderBar::setBarColor(const QColor bColor, const QColor eColor)
 {
-   if (bColor == m_barStartColor && eColor == m_barEndColor) return;
-   m_barStartColor = bColor;
-   m_barEndColor = eColor;
-   update();
+    if (bColor == m_barStartColor && eColor == m_barEndColor) return;
+    m_barStartColor = bColor;
+    m_barEndColor = eColor;
+    update();
 }
 
 void SiderBar::setItemColor(const QColor color)
@@ -156,80 +97,70 @@ void SiderBar::setItemColor(const QColor bColor, const QColor eColor)
     update();
 }
 
-void SiderBar::setItemTextColor(QColor color)
+void SiderBar::setTextColor(QColor color)
 {
-    if (color != m_itemTextColor)
+    if (color != m_textColor)
     {
-        m_itemTextColor = color;
+        m_textColor = color;
         update();
     }
 }
 
-void SiderBar::setItemLineColor(QColor color)
+void SiderBar::setLineColor(QColor color)
 {
-    if (color != m_itemLineColor)
+    if (color != m_lineColor)
     {
-        m_itemLineColor = color;
+        m_lineColor = color;
         update();
     }
 }
 
-void SiderBar::setBarRadious(uint radious)
+void SiderBar::setBarRadius(int radius)
 {
-    if (radious == m_barRadious) return;
+    if (radius < 0 || radius == m_barRadious) return;
 
-    m_barRadious = radious;
+    m_barRadious = radius;
     update();
 }
 
-void SiderBar::setItemRadious(uint radious)
+void SiderBar::setItemRadius(int radius)
 {
-    if (radious == m_itemRadious) return;
+    if (radius < 0 || radius == m_itemRadious) return;
 
-    m_itemRadious = radious;
+    m_itemRadious = radius;
     update();
 }
 
-void SiderBar::setSpace(uint space)
+void SiderBar::setSpace(int space)
 {
-    if (space == m_space) return;
+    if (space < 0 || space == m_space) return;
 
     m_space = space;
     update();
 }
 
-void SiderBar::setItemLineWidth(uint width)
+void SiderBar::setLineWidth(int width)
 {
-    if (width == m_itemLineWidth) return;
+    if (width < 0 || width == m_lineWidth) return;
 
-    m_itemLineWidth = width;
+    m_lineWidth = width;
     update();
 }
 
-void SiderBar::setItemLineStyle(SiderBar::ItemLineStyle style)
+void SiderBar::setLineStyle(SiderBar::LineStyle style)
 {
-    if (style != m_itemLineStyle)
-    {
-        m_itemLineStyle = style;
-        update();
-    }
+    if (style == m_lineStyle) return;
+
+    m_lineStyle = style;
+    update();
 }
 
 void SiderBar::setOrientation(Qt::Orientation orientation)
 {
-    if (orientation != m_orientation) return;
+    if (orientation == m_orientation) return;
 
     m_orientation = orientation;
     update();
-}
-
-void SiderBar::setFixed(bool fixed)
-{
-    if (fixed != m_bFixed)
-    {
-        m_bFixed = fixed;
-        update();
-    }
 }
 
 void SiderBar::setEnableKeyMove(bool enable)
@@ -247,63 +178,60 @@ void SiderBar::moveToFirst()
 
 void SiderBar::moveToLast()
 {
-    moveTo(m_itemList.size() - 1);
+    moveTo(m_items.size() - 1);
 }
 
 void SiderBar::moveToPrevious()
 {
-    moveTo(m_currentItemIndex - 1);
+    moveTo(m_currentIndex - 1);
 }
 
 void SiderBar::moveToNext()
 {
-    moveTo(m_currentItemIndex + 1);
+    moveTo(m_currentIndex + 1);
 }
 
 void SiderBar::moveTo(int index)
 {
-    if (index >= 0 && index < m_itemList.size() && index != m_currentItemIndex)
+    if (index >= 0 && index < m_items.count() && index != m_currentIndex)
     {
-        emit itemClicked(index, m_itemList[index].first);
-        if (index == m_currentItemIndex)
-            return;
-        if (m_currentItemIndex == -1)
-            m_startRect = m_itemList[index].second;
-        m_forward = index > m_currentItemIndex;
-        m_currentItemIndex = index;
-        m_stopRect = m_itemList[index].second;
+        if (index == m_currentIndex) return;
+
+        emit itemClicked(index, m_items[index].first);
+
+        if (m_currentIndex == -1)
+            m_startRect = m_items[index].second;
+
+        m_forward = index > m_currentIndex;
+        m_currentIndex = index;
+        m_stopRect = m_items[index].second;
+
         m_slideTimer->start();
     }
 }
 
 void SiderBar::moveTo(const QString str)
 {
-    QMap<int, QPair<QString, QRectF>>::iterator it = m_itemList.begin();
-    for (; it != m_itemList.end(); ++it)
-    {
-        if (it.value().first == str)
-        {
-            int targetIndex = it.key();
-            if (targetIndex == m_currentItemIndex)
-                return;
-            moveTo(targetIndex);
-            break;
+    foreach (auto item, m_items) {
+        if(item.first == str) {
+            int index = m_items.indexOf(item);
+            if(m_currentIndex !=  index) {
+                moveTo(index);
+                break;
+            }
         }
     }
 }
 
 void SiderBar::moveTo(const QPointF point)
 {
-    QMap<int, QPair<QString, QRectF>>::iterator it = m_itemList.begin();
-    for (; it != m_itemList.end(); ++it)
-    {
-        if (it.value().second.contains(point))
-        {
-            int targetIndex = it.key();
-            if (targetIndex == m_currentItemIndex)
-                return;
-            moveTo(targetIndex);
-            break;
+    foreach (auto item, m_items) {
+        if(item.second.contains(point)) {
+            int index = m_items.indexOf(item);
+            if(m_currentIndex !=  index) {
+                moveTo(index);
+                break;
+            }
         }
     }
 }
@@ -321,50 +249,40 @@ void SiderBar::paintEvent(QPaintEvent *)
 
 void SiderBar::resizeEvent(QResizeEvent *event)
 {
-    if (m_bFixed) return;
-
-    qreal addWidth, addHeight;
-    if (m_orientation == Qt::Horizontal)
-    {
-        addWidth = 1.0 * (width() - m_totalTextWidth) / m_itemList.size();
-        addHeight = 0;
-    }
-    else
-    {
-        addWidth = 0;
-        addHeight = 1.0 * (height() - m_totalTextHeight) / m_itemList.size();
-    }
-    int itemCount = m_itemList.size();
+    int count = m_items.size();
     qreal dx = 0;
     qreal dy = 0;
-    QPointF topLeft, bottomRight;
-    for (int i = 0; i < itemCount; ++i)
+
+    QFontMetrics fm(font());
+    int textHeight = fm.height();
+    int textWidth = textHeight*2 + m_space*2;
+    if(!m_items.empty())
+        textWidth = fm.horizontalAdvance(m_items[0].first)+m_space;
+
+    if(Qt::Horizontal == m_orientation) setMinimumHeight(textHeight+m_space);
+    else setFixedWidth(textWidth*2+m_space*2);
+
+    for (int i = 0; i < count; ++i)
     {
-        QPair<QString, QRectF> &itemData = m_itemList[i];
-        QFont f = font();
-        QFontMetrics fm(f);
-        int textWidth = fm.horizontalAdvance(itemData.first);
-        int textHeight = fm.height();
-        if (m_orientation == Qt::Horizontal)
+        QPair<QString, QRectF> &itemData = m_items[i];
+        if (Qt::Horizontal == m_orientation)
         {
-            topLeft = QPointF(dx, 0);
-            dx += textWidth + m_space + addWidth;
-            dy = m_totalTextHeight + addHeight;
+            itemData.second.setTopLeft(QPointF(dx, 0));
+            dx += width() * 1.0 /count;
+            itemData.second.setBottomRight(QPointF(dx, height()));
         }
         else
         {
-            topLeft = QPointF(0, dy);
-            dx = m_totalTextWidth + addWidth;
-            dy += textHeight + m_space + addHeight;
+            itemData.second.setTopLeft(QPointF(0, dy));
+            dy +=  textHeight + m_space;
+            itemData.second.setBottomRight(QPointF(width(), dy));
+            qDebug() << itemData.second;
         }
-        bottomRight = QPointF(dx, dy);
-        QRectF textRect(topLeft, bottomRight);
-        itemData.second = textRect;
-        if (i == m_currentItemIndex)
-        {
-            m_startRect = textRect;
-            m_stopRect = textRect;
-        }
+    }
+
+    if(-1 != m_currentIndex) {
+        m_startRect = m_items[m_currentIndex].second;
+        m_stopRect = m_items[m_currentIndex].second;
     }
 
     return QWidget::resizeEvent(event);
@@ -372,35 +290,15 @@ void SiderBar::resizeEvent(QResizeEvent *event)
 
 void SiderBar::mousePressEvent(QMouseEvent *event)
 {
-    QMap<int, QPair<QString, QRectF>>::iterator it = m_itemList.begin();
-    for (; it != m_itemList.end(); ++it)
-    {
-        if (it.value().second.contains(event->pos()))
-        {
-            int targetIndex = it.key();
-            emit itemClicked(targetIndex, it.value().first);
-            if (targetIndex == m_currentItemIndex)
-                return;
-            if (m_currentItemIndex == -1)
-            {
-                m_startRect = it.value().second;
-            }
-            m_forward = targetIndex > m_currentItemIndex;
-            m_currentItemIndex = targetIndex;
-            m_stopRect = it.value().second;
-            m_slideTimer->start();
-            break;
-        }
-    }
+    moveTo(event->pos());
+    return QWidget::mousePressEvent(event);
 }
 
 void SiderBar::keyPressEvent(QKeyEvent *event)
 {
     if (!m_bKeyMove)
-    {
-        QWidget::keyPressEvent(event);
-        return;
-    }
+        return QWidget::keyPressEvent(event);
+
     switch (event->key())
     {
     case Qt::Key_Home:
@@ -431,6 +329,7 @@ void SiderBar::drawBarBackground(QPainter *p)
     linerGradient.setColorAt(0.0, m_barStartColor);
     linerGradient.setColorAt(1.0, m_barEndColor);
     p->setBrush(linerGradient);
+
     p->drawRoundedRect(rect(), m_barRadious, m_barRadious);
     p->restore();
 }
@@ -445,16 +344,17 @@ void SiderBar::drawItemBackground(QPainter *p)
     linerGradient.setColorAt(1.0, m_itemEndColor);
     p->setPen(Qt::NoPen);
     p->setBrush(linerGradient);
+
     p->drawRoundedRect(m_startRect, m_itemRadious, m_itemRadious);
     p->restore();
 }
 
 void SiderBar::drawItemLine(QPainter *p)
 {
-    if (m_startRect.isNull())
-        return;
+    if (m_startRect.isNull())  return;
+
     QPointF p1, p2;
-    switch (m_itemLineStyle)
+    switch (m_lineStyle)
     {
     case None:
         return;
@@ -481,10 +381,10 @@ void SiderBar::drawItemLine(QPainter *p)
     }
     p->save();
     QPen linePen;
-    linePen.setColor(m_itemLineColor);
-    linePen.setWidth(m_itemLineWidth);
+    linePen.setColor(m_lineColor);
+    linePen.setWidth(m_lineWidth);
     p->setPen(linePen);
-    if (m_itemLineStyle == ItemRect)
+    if (m_lineStyle == ItemRect)
     {
         p->drawRoundedRect(QRectF(p1, p2), m_itemRadious, m_itemRadious);
     }
@@ -498,14 +398,11 @@ void SiderBar::drawItemLine(QPainter *p)
 void SiderBar::drawText(QPainter *p)
 {
     p->save();
-    p->setPen(m_itemTextColor);
-    QMap<int, QPair<QString, QRectF>>::iterator it = m_itemList.begin();
-    while (it != m_itemList.end())
-    {
-        QPair<QString, QRectF> &itemData = it.value();
-        p->drawText(itemData.second, Qt::AlignCenter, itemData.first);
-        ++it;
-    }
+    p->setPen(m_textColor);
+
+    foreach (auto item, m_items)
+        p->drawText(item.second, Qt::AlignCenter, item.first);
+
     p->restore();
 }
 
@@ -513,22 +410,22 @@ void SiderBar::doSlide()
 {
     if (m_space <= 0 || m_startRect == m_stopRect)
         return;
-    qreal dx, dy;
+    int dx, dy;
     if (m_orientation == Qt::Horizontal)
     {
-        dx = m_space / 2.0;
+        dx = m_space / 2;
         dy = 0;
     }
     else
     {
         dx = 0;
-        dy = m_space / 2.0;
+        dy = m_space / 2;
     }
     if (m_forward)
     {
         m_startRect.adjust(dx, dy, dx, dy);
         if ((m_orientation == Qt::Horizontal && m_startRect.topLeft().x() >= m_stopRect.topLeft().x()) ||
-            (m_orientation == Qt::Vertical && m_startRect.topLeft().y() >= m_stopRect.topLeft().y()))
+                (m_orientation == Qt::Vertical && m_startRect.topLeft().y() >= m_stopRect.topLeft().y()))
         {
             m_slideTimer->stop();
             if (m_startRect != m_stopRect)
@@ -539,7 +436,7 @@ void SiderBar::doSlide()
     {
         m_startRect.adjust(-dx, -dy, -dx, -dy);
         if ((m_orientation == Qt::Horizontal && m_startRect.topLeft().x() <= m_stopRect.topLeft().x()) ||
-            (m_orientation == Qt::Vertical && m_startRect.topLeft().y() <= m_stopRect.topLeft().y()))
+                (m_orientation == Qt::Vertical && m_startRect.topLeft().y() <= m_stopRect.topLeft().y()))
         {
             m_slideTimer->stop();
             if (m_startRect != m_stopRect)

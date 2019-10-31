@@ -7,7 +7,6 @@ SiderBarTest::SiderBarTest(QWidget *parent) : QWidget(parent),
 {
     ui->setupUi(this);
 
-    ui->widget->setFixed(true);
     ui->widget->setOrientation(Qt::Vertical);
     ui->widget->addItem("主界面");
     ui->widget->addItem("系统设置");
