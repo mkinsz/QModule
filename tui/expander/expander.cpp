@@ -24,9 +24,10 @@ Expander::Expander(QWidget *parent)
     setLayout(layout);
 }
 
-void Expander::onPressed(){
+void Expander::onPressed()
+{
 
-    if(expanded)
+    if (expanded)
     {
         expanded = false;
         button->setIcon(QIcon(":/expander/arrow.png"));
@@ -82,13 +83,14 @@ void Expander::insertPage(int index, QWidget *page)
 
 void Expander::setCurrentIndex(int index)
 {
-    if (index != currentIndex()) {
+    if (index != currentIndex())
+    {
         stackWidget->setCurrentIndex(index);
         emit currentIndexChanged(index);
     }
 }
 
-QWidget* Expander::widget(int index)
+QWidget *Expander::widget(int index)
 {
     return stackWidget->widget(index);
 }
@@ -105,8 +107,10 @@ QString Expander::expanderTitle() const
 
 void Expander::setExpanded(bool flag)
 {
-    if(flag != expanded) onPressed();
-    else expanded = flag;
+    if (flag != expanded)
+        onPressed();
+    else
+        expanded = flag;
 }
 
 bool Expander::isExpanded() const

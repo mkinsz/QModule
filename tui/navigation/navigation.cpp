@@ -7,7 +7,7 @@
 
 NavDelegate::NavDelegate(QObject *parent) : QStyledItemDelegate(parent)
 {
-    nav = (Navigation *)parent;
+    nav = static_cast<Navigation *>(parent);
 }
 
 NavDelegate::~NavDelegate()
@@ -18,7 +18,7 @@ QSize NavDelegate::sizeHint(const QStyleOptionViewItem &option,
                             const QModelIndex &index) const
 {
     Q_UNUSED(option)
-    NavModel::TreeNode *node = (NavModel::TreeNode *)index.data(Qt::UserRole).toUInt();
+    NavModel::TreeNode *node = reinterpret_cast<NavModel::TreeNode *>(index.data(Qt::UserRole).toUInt());
 
     if (node->level == 1)
     {
@@ -34,7 +34,7 @@ void NavDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
                         const QModelIndex &index) const
 {
     painter->setRenderHint(QPainter::Antialiasing);
-    NavModel::TreeNode *node = (NavModel::TreeNode *)index.data(Qt::UserRole).toUInt();
+    NavModel::TreeNode *node = reinterpret_cast<NavModel::TreeNode *>(index.data(Qt::UserRole).toUInt());
 
     //绘制背景
     QColor colorBg;

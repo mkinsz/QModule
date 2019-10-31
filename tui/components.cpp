@@ -13,8 +13,19 @@ Components::Components(QWidget *parent) : QWidget(parent),
 
     setFocusPolicy(Qt::ClickFocus);
 
-    connect(ui->searchedit, &SearchEdit::search, this, [](QString content) { qDebug() << content; });
-    connect(ui->pushButton, &QPushButton::clicked, this, [&] { qDebug() << ui->ipedit->getIpAddress(); });
+    ui->titleBar->addItem("推荐");
+    ui->titleBar->addItem("电台");
+    ui->titleBar->addItem("排行");
+    ui->titleBar->addItem("歌单");
+    ui->titleBar->addItem("搜索");
+    ui->titleBar->setBarColor(QColor(255, 255, 255));
+    ui->titleBar->setItemColor(QColor(209, 216, 240));
+    ui->titleBar->setItemTextColor(QColor(58, 58, 58));
+    ui->titleBar->setSpace(15);
+    ui->titleBar->moveTo(0);
+
+    connect(ui->searchEdit, &SearchEdit::search, this, [](QString content) { qDebug() << content; });
+    connect(ui->pushButton, &QPushButton::clicked, this, [&] { qDebug() << ui->ipEdit->getIpAddress(); });
     connect(ui->msgBtn, &QPushButton::clicked, this, [&] {
         m_nm->notify("消息", "你中大奖啦！", ":/resources/message.png", "https://github.com/mkinsz/qmodule");
     });
