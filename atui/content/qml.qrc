@@ -3,5 +3,46 @@
         <file>res/logo.ico</file>
         <file>res/style.qss</file>
         <file>main.qml</file>
+        <file>res/close.png</file>
+        <file>res/show.png</file>
+        <file>Loading.qml</file>
+        <file>NetworkError.qml</file>
+        <file>Details.qml</file>
+        <file>MinWindow.qml</file>
+        <file>MusicItem.qml</file>
+        <file>NavigationBar.qml</file>
+        <file>NavigationBtn.qml</file>
+        <file>PersonFM.qml</file>
+        <file>PlayBar.qml</file>
+        <file>PlayList.qml</file>
+        <file>PlayListDetails.qml</file>
+        <file>PlayListItem.qml</file>
+        <file>PlayLists.qml</file>
+        <file>PlaySlider.qml</file>
+        <file>TabBtn.qml</file>
+        <file>res/music.png</file>
+        <file>res/music.svg</file>
+        <file>res/video.svg</file>
+        <file>res/wave.svg</file>
+        <file>res/favourite.svg</file>
+        <file>res/mute.svg</file>
+        <file>res/sound.svg</file>
+        <file>res/next.svg</file>
+        <file>res/pause.svg</file>
+        <file>res/prev.svg</file>
+        <file>res/play.svg</file>
+        <file>res/loop.svg</file>
+        <file>res/musicrl.svg</file>
+        <file>res/order.svg</file>
+        <file>res/playlist.svg</file>
+        <file>res/random.svg</file>
+        <file>res/repeat.svg</file>
+        <file>res/repeatone.svg</file>
+        <file>res/download.svg</file>
+        <file>res/close.svg</file>
+        <file>res/maximize.svg</file>
+        <file>res/mini.svg</file>
+        <file>res/minimize.svg</file>
+        <file>res/normal.svg</file>
     </qresource>
 </RCC>

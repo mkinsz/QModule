@@ -32,5 +32,6 @@ include(singleapp/singleapp.pri)
 include(titlebar/titlebar.pri)
 include(content/content.pri)
 include(systemtray/systemtray.pri)
+include(network/network.pri)
 
 RESOURCES +=

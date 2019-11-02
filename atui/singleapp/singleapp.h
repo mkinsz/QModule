@@ -10,10 +10,10 @@ class SingleApp : public QApplication
 {
     Q_OBJECT
 public:
-    explicit SingleApp(int argc,char *argv[]);
+    explicit SingleApp(int argc, char *argv[]);
     ~SingleApp();
 
-    bool isRunning();       //判断进程是否存在
+    bool isRunning(); //判断进程是否存在
 
 public:
     QWidget *m_pMainWidget; //主窗口

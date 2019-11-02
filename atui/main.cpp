@@ -8,9 +8,6 @@
 
 int main(int argc, char *argv[])
 {
-//    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-//    QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
-
     SingleApp a(argc, argv);
     if(!a.isRunning())
     {

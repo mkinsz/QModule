@@ -3,6 +3,7 @@
 #include "titlebar.h"
 #include "frameless.h"
 #include "systemtray.h"
+#include "network.h"
 
 #include <QVBoxLayout>
 #include <QApplication>
@@ -12,6 +13,7 @@
 #include <QSettings>
 #include <QCloseEvent>
 #include <QQuickWidget>
+#include <QScreen>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -22,14 +24,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     TitleBar *pTitleBar=new TitleBar(this);
     installEventFilter(pTitleBar);
-    setWindowTitle("ATUI");
-    setWindowIcon(QIcon(":/res/logo.ico"));
+    setWindowTitle("AT-Music");
+    setWindowIcon(QIcon(":/res/music.png"));
 
     QDesktopWidget* pDesktop = qApp->desktop();
     int monitor = pDesktop->screenNumber(this);    //获取当前显示器编号
-//    QWidget* pScreen = pDesktop->screen(monitor);
+    QScreen* pScreen = qApp->screens()[monitor];
     setMinimumSize(1000,700);
-    setMaximumSize(pDesktop->availableGeometry(monitor).width(),pDesktop->availableGeometry(monitor).height());
+    setMaximumSize(pScreen->availableSize());
 
     Frameless *pHelper = new Frameless(this);
     pHelper->activateOn(this);  //激活当前窗体
@@ -43,9 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
     pWidget->resize(this->width(),this->height()-pTitleBar->height());
     pWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
 
-//    qmlRegisterType<Network>("Network",1,0,"Network");
+    qmlRegisterType<Network>("Network",1,0,"Network");
 
-    pWidget->setSource(QUrl(QStringLiteral(":/main.qml")));
+    pWidget->setSource(QUrl("qrc:/main.qml"));
 
     QVBoxLayout *pLayout = new QVBoxLayout();
     pLayout->setSpacing(0);
@@ -68,17 +70,17 @@ void MainWindow::paintEvent(QPaintEvent *event)
     Q_UNUSED(event)
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
-    path.addRect(0, 0, this->width()-1, this->height()-1);
+    path.addRect(0, 0, width(), height());
 
     QPainter painter(this);
-    painter.setPen(Qt::lightGray);
-    painter.fillPath(path, QBrush(Qt::white));
+    painter.setPen(Qt::transparent);
+    painter.fillPath(path, QBrush(QColor("#3D4D5A")));
     painter.drawPath(path);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    QSettings settings("ATUI", "ATMUSIC");
+    QSettings settings("ATUI", "AT-MUSIC");
     settings.setValue("geometry", saveGeometry());
     this->hide();
     event->ignore();

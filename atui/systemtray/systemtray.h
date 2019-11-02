@@ -9,15 +9,14 @@ class SystemTray : public QSystemTrayIcon
 {
     Q_OBJECT
 public:
-    explicit SystemTray(QWidget *parent=nullptr);
+    explicit SystemTray(QWidget *parent = nullptr);
     ~SystemTray();
 
 private slots:
-    void slot_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason);
+    void onActivatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason);
 
 private:
     QWidget *m_pWidget;
-
 };
 
 #endif // SYSTEMTRAY_H

@@ -11,17 +11,17 @@
 class WidgetData;
 
 /*****
- * FramelessHelperPrivate
+ * FramelessPrivate
  * 存储界面对应的数据集合，以及是否可移动、可缩放属性
 *****/
 class FramelessPrivate
 {
 public:
-    QHash<QWidget*, WidgetData*> m_widgetDataHash;
-    bool m_bWidgetMovable        : true;
-    bool m_bWidgetResizable      : true;
-    bool m_bRubberBandOnResize   : true;
-    bool m_bRubberBandOnMove     : true;
+    QHash<QWidget *, WidgetData *> m_widgetDataHash;
+    bool m_bWidgetMovable : true;
+    bool m_bWidgetResizable : true;
+    bool m_bRubberBandOnResize : true;
+    bool m_bRubberBandOnMove : true;
 };
 
 /*****
@@ -36,15 +36,15 @@ public:
     void recalculate(const QPoint &globalMousePos, const QRect &frameRect);
 
 public:
-    bool m_bOnEdges              : true;
-    bool m_bOnLeftEdge           : true;
-    bool m_bOnRightEdge          : true;
-    bool m_bOnTopEdge            : true;
-    bool m_bOnBottomEdge         : true;
-    bool m_bOnTopLeftEdge        : true;
-    bool m_bOnBottomLeftEdge     : true;
-    bool m_bOnTopRightEdge       : true;
-    bool m_bOnBottomRightEdge    : true;
+    bool m_bOnEdges : true;
+    bool m_bOnLeftEdge : true;
+    bool m_bOnRightEdge : true;
+    bool m_bOnTopEdge : true;
+    bool m_bOnBottomEdge : true;
+    bool m_bOnTopLeftEdge : true;
+    bool m_bOnBottomLeftEdge : true;
+    bool m_bOnTopRightEdge : true;
+    bool m_bOnBottomRightEdge : true;
 
     static int m_nBorderWidth;
     static int m_nTitleHeight;
@@ -68,7 +68,7 @@ void CursorPosCalculator::reset()
     m_bOnBottomEdge = false;
     m_bOnTopLeftEdge = false;
     m_bOnBottomLeftEdge = false;
-    m_bOnTopRightEdge  = false;
+    m_bOnTopRightEdge = false;
     m_bOnBottomRightEdge = false;
 }
 
@@ -84,14 +84,13 @@ void CursorPosCalculator::recalculate(const QPoint &gMousePos, const QRect &fram
     int frameHeight = frameRect.height();
 
     m_bOnLeftEdge = (globalMouseX >= frameX &&
-                     globalMouseX <= frameX + m_nBorderWidth );
-
+                     globalMouseX <= frameX + m_nBorderWidth);
 
     m_bOnRightEdge = (globalMouseX >= frameX + frameWidth - m_nBorderWidth &&
                       globalMouseX <= frameX + frameWidth);
 
     m_bOnTopEdge = (globalMouseY >= frameY &&
-                    globalMouseY <= frameY + m_nBorderWidth );
+                    globalMouseY <= frameY + m_nBorderWidth);
 
     m_bOnBottomEdge = (globalMouseY >= frameY + frameHeight - m_nBorderWidth &&
                        globalMouseY <= frameY + frameHeight);
@@ -113,7 +112,7 @@ class WidgetData
 public:
     explicit WidgetData(FramelessPrivate *d, QWidget *pTopLevelWidget);
     ~WidgetData();
-    QWidget* widget();
+    QWidget *widget();
     // 处理鼠标事件-划过、按下、释放、移动
     void handleWidgetEvent(QEvent *event);
     // 更新橡皮筋状态
@@ -177,7 +176,7 @@ WidgetData::~WidgetData()
     m_pRubberBand = nullptr;
 }
 
-QWidget* WidgetData::widget()
+QWidget *WidgetData::widget()
 {
     return m_pWidget;
 }
@@ -189,19 +188,19 @@ void WidgetData::handleWidgetEvent(QEvent *event)
     default:
         break;
     case QEvent::MouseButtonPress:
-        handleMousePressEvent(static_cast<QMouseEvent*>(event));
+        handleMousePressEvent(static_cast<QMouseEvent *>(event));
         break;
     case QEvent::MouseButtonRelease:
-        handleMouseReleaseEvent(static_cast<QMouseEvent*>(event));
+        handleMouseReleaseEvent(static_cast<QMouseEvent *>(event));
         break;
     case QEvent::MouseMove:
-        handleMouseMoveEvent(static_cast<QMouseEvent*>(event));
+        handleMouseMoveEvent(static_cast<QMouseEvent *>(event));
         break;
     case QEvent::Leave:
-        handleLeaveEvent(static_cast<QMouseEvent*>(event));
+        handleLeaveEvent(static_cast<QMouseEvent *>(event));
         break;
     case QEvent::HoverMove:
-        handleHoverMoveEvent(static_cast<QHoverEvent*>(event));
+        handleHoverMoveEvent(static_cast<QHoverEvent *>(event));
         break;
     }
 }
@@ -233,24 +232,24 @@ void WidgetData::updateCursorShape(const QPoint &gMousePos)
 
     m_moveMousePos.recalculate(gMousePos, m_pWidget->frameGeometry());
 
-    if(m_moveMousePos.m_bOnTopLeftEdge || m_moveMousePos.m_bOnBottomRightEdge)
+    if (m_moveMousePos.m_bOnTopLeftEdge || m_moveMousePos.m_bOnBottomRightEdge)
     {
-        m_pWidget->setCursor( Qt::SizeFDiagCursor );
+        m_pWidget->setCursor(Qt::SizeFDiagCursor);
         m_bCursorShapeChanged = true;
     }
-    else if(m_moveMousePos.m_bOnTopRightEdge || m_moveMousePos.m_bOnBottomLeftEdge)
+    else if (m_moveMousePos.m_bOnTopRightEdge || m_moveMousePos.m_bOnBottomLeftEdge)
     {
-        m_pWidget->setCursor( Qt::SizeBDiagCursor );
+        m_pWidget->setCursor(Qt::SizeBDiagCursor);
         m_bCursorShapeChanged = true;
     }
-    else if(m_moveMousePos.m_bOnLeftEdge || m_moveMousePos.m_bOnRightEdge)
+    else if (m_moveMousePos.m_bOnLeftEdge || m_moveMousePos.m_bOnRightEdge)
     {
-        m_pWidget->setCursor( Qt::SizeHorCursor );
+        m_pWidget->setCursor(Qt::SizeHorCursor);
         m_bCursorShapeChanged = true;
     }
-    else if(m_moveMousePos.m_bOnTopEdge || m_moveMousePos.m_bOnBottomEdge)
+    else if (m_moveMousePos.m_bOnTopEdge || m_moveMousePos.m_bOnBottomEdge)
     {
-        m_pWidget->setCursor( Qt::SizeVerCursor );
+        m_pWidget->setCursor(Qt::SizeVerCursor);
         m_bCursorShapeChanged = true;
     }
     else
@@ -348,7 +347,7 @@ void WidgetData::resizeWidget(const QPoint &gMousePos)
     }
 }
 
-void WidgetData::moveWidget(const QPoint& gMousePos)
+void WidgetData::moveWidget(const QPoint &gMousePos)
 {
     if (d->m_bRubberBandOnMove)
     {
@@ -356,17 +355,17 @@ void WidgetData::moveWidget(const QPoint& gMousePos)
     }
     else
     {
-        if(m_pWidget->isMaximized())
+        if (m_pWidget->isMaximized())
         {
             m_pWidget->showNormal();
-            QDesktopWidget* desktopWidget = QApplication::desktop();
+            QDesktopWidget *desktopWidget = QApplication::desktop();
             int curMonitor = desktopWidget->screenNumber(m_pWidget);        //获取当前显示器编号
-            int d_w=desktopWidget->availableGeometry(curMonitor).width();   //桌面宽度
-            int w_w=m_pWidget->width(); //窗口宽度
-            int x=m_ptDragPos.x()*w_w/d_w;
-            QPoint p(x,m_ptDragPos.y());
-            m_pWidget->move(gMousePos-p);
-            m_ptDragPos=p;
+            int d_w = desktopWidget->availableGeometry(curMonitor).width(); //桌面宽度
+            int w_w = m_pWidget->width();                                   //窗口宽度
+            int x = m_ptDragPos.x() * w_w / d_w;
+            QPoint p(x, m_ptDragPos.y());
+            m_pWidget->move(gMousePos - p);
+            m_ptDragPos = p;
         }
         else
             m_pWidget->move(gMousePos - m_ptDragPos);
@@ -393,7 +392,7 @@ void WidgetData::handleMousePressEvent(QMouseEvent *event)
                 m_pRubberBand->show();
             }
         }
-        else if (d->m_bRubberBandOnMove&&m_bLeftButtonTitlePressed)
+        else if (d->m_bRubberBandOnMove && m_bLeftButtonTitlePressed)
         {
             m_pRubberBand->setGeometry(frameRect);
             m_pRubberBand->show();
@@ -453,17 +452,17 @@ void WidgetData::handleHoverMoveEvent(QHoverEvent *event)
 }
 
 Frameless::Frameless(QObject *parent) : QObject(parent),
-    d(new FramelessPrivate())
+                                        d(new FramelessPrivate())
 {
-    d->m_bWidgetResizable=true;
-    d->m_bWidgetMovable=true;
-    d->m_bRubberBandOnMove=true;
-    d->m_bRubberBandOnResize=true;
+    d->m_bWidgetResizable = true;
+    d->m_bWidgetMovable = true;
+    d->m_bRubberBandOnMove = true;
+    d->m_bRubberBandOnResize = true;
 }
 
 Frameless::~Frameless()
 {
-    QList<QWidget *> keys=d->m_widgetDataHash.keys();
+    QList<QWidget *> keys = d->m_widgetDataHash.keys();
     int size = keys.size();
     for (int i = 0; i < size; ++i)
     {
@@ -482,7 +481,7 @@ bool Frameless::eventFilter(QObject *obj, QEvent *event)
     case QEvent::MouseButtonRelease:
     case QEvent::Leave:
     {
-        WidgetData *data = d->m_widgetDataHash.value(static_cast<QWidget*>(obj));
+        WidgetData *data = d->m_widgetDataHash.value(static_cast<QWidget *>(obj));
         if (data)
         {
             data->handleWidgetEvent(event);
@@ -517,7 +516,7 @@ void Frameless::removeFrom(QWidget *topLevelWidget)
 void Frameless::setRubberBandOnMove(bool movable)
 {
     d->m_bRubberBandOnMove = movable;
-    QList<WidgetData*> list = d->m_widgetDataHash.values();
+    QList<WidgetData *> list = d->m_widgetDataHash.values();
     foreach (WidgetData *data, list)
     {
         data->updateRubberBandStatus();
@@ -537,7 +536,7 @@ void Frameless::setWidgetResizable(bool resizable)
 void Frameless::setRubberBandOnResize(bool resizable)
 {
     d->m_bRubberBandOnResize = resizable;
-    QList<WidgetData*> list = d->m_widgetDataHash.values();
+    QList<WidgetData *> list = d->m_widgetDataHash.values();
     foreach (WidgetData *data, list)
     {
         data->updateRubberBandStatus();
