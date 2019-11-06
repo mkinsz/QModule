@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/icon.png</file>
+        <file>res/logo.ico</file>
+        <file>skin/icon/dark/close.png</file>
+        <file>skin/icon/dark/clothes.png</file>
+        <file>skin/icon/dark/cog.png</file>
+        <file>skin/icon/dark/collapsed.png</file>
+        <file>skin/icon/dark/full.png</file>
+        <file>skin/icon/dark/lock.png</file>
+        <file>skin/icon/dark/maxi.png</file>
+        <file>skin/icon/dark/minus.png</file>
+        <file>skin/icon/dark/unlock.png</file>
+        <file>res/float.png</file>
+        <file>skin/icon/dark/down.png</file>
+        <file>skin/black.css</file>
+        <file>skin/color.css</file>
+        <file>skin/white.css</file>
+    </qresource>
+</RCC>

@@ -50,7 +50,7 @@
       <widget class="SearchEdit" name="searchEdit"/>
      </item>
      <item row="0" column="1">
-      <widget class="ComboBox" name="comboBox">
+      <widget class="GComboBox" name="comboBox">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -134,15 +134,15 @@
    <header>ipedit.h</header>
   </customwidget>
   <customwidget>
-   <class>ComboBox</class>
-   <extends>QComboBox</extends>
-   <header>combobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>SiderBar</class>
    <extends>QWidget</extends>
    <header>siderbar.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GComboBox</class>
+   <extends>QComboBox</extends>
+   <header>gcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

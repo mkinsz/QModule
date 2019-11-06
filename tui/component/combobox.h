@@ -3,38 +3,34 @@
 
 #include <QComboBox>
 
-class ComboBoxPrivate;
 class ComboBox : public QComboBox
 {
     Q_OBJECT
 
+    Q_PROPERTY(int itemWidth READ getItemWidth WRITE setItemWidth)
+        Q_PROPERTY(int itemHeight READ getItemHeight WRITE setItemHeight)
+        Q_PROPERTY(bool autoWidth READ getAutoWidth WRITE setAutoWidth)
+
 public:
     explicit ComboBox(QWidget *parent = nullptr);
-    ~ComboBox();
-
-    void setCurrentIndex(int index);
-    int currentIndex() const;
-
-    QString currentName() const;
-    QColor currentColor1() const;
-    QColor currentColor2() const;
-
-    static QPair<QColor, QColor> colorPair(int index);
-
-    void showPopup();
-    void hidePopup();
 
 protected:
-    void paintEvent(QPaintEvent *e);
-    void resizeEvent(QResizeEvent *e);
-    QSize minimumSizeHint() const;
+    void showEvent(QShowEvent *);
 
-private slots:
-    void onActivated(int index);
+public:
+    int getItemWidth()              const;
+    int getItemHeight()             const;
+    bool getAutoWidth()             const;
+
+public Q_SLOTS:
+    void setItemWidth(int itemWidth);
+    void setItemHeight(int itemHeight);
+    void setAutoWidth(bool autoWidth);
 
 private:
-    ComboBoxPrivate *m_dptr;
-
-    Q_DISABLE_COPY(ComboBox)
+    int itemWidth;                  //元素宽度
+    int itemHeight;                 //元素高度
+    bool autoWidth;                 //是否自动调整元素宽度
+    int maxItemWidth;               //最大元素宽度
 };
 #endif // GRADIENTCOMBOBOX_H
