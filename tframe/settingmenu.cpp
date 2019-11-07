@@ -43,7 +43,7 @@ void SettingMenu::onTriggered(QAction *action)
 
 void SettingMenu::initData()
 {
-    m_names << "Show FlyWindow" << "Show FloatBar" << "Settings" << "Update" << "About" << "Quit";
+    m_names << "FlyWindow" << "FloatBar" << "Settings" << "Update" << "About" << "Quit";
 }
 
 void SettingMenu::initUI()

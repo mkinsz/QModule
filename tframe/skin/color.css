@@ -37,7 +37,6 @@ QMenu::item:disabled
     left: 1px;
 }
 
-
 QMenu::separator {
     height: 2px;
     background: lightblue;
@@ -95,7 +94,7 @@ QComboBox:disabled{
 
 QStatusBar {
     color: white;
-    background-color: rgba(0, 211, 197, 255);
+    background-color: rgb(0, 211, 197);
     border-top: 1px solid rgb(0, 82, 112);
 }
 
@@ -115,7 +114,7 @@ QSplitter{
 }
 
 QSplitter::handle {
-    background-color: qlineargradient(spread:pad, x1:-1, y1:0, x2:1 y2:0, stop:0 rgba(0, 211, 197, 255), stop:1 rgba(0, 82, 112, 255));
+    background-color: rgb(0, 211, 197);
 }
 
 QSplitter::handle:horizontal {
@@ -177,45 +176,36 @@ QScrollBar::sub-line:vertical {
     subcontrol-origin: margin;
 }
 
-/*QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-    width: 3px;
-    height: 3px;
-    background: #31394E;
-}*/
-
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: none;
 }
-
 
 QScrollBar:horizontal {
     background: white;
     height: 10px;
     margin: 0px 0px 0px 0px;
 }
+
 QScrollBar::handle:horizontal {
     background: rgb(70, 97, 102);
     min-width: 1px;
 }
+
 QScrollBar::add-line:horizontal {
     width: 1px;
     subcontrol-position: right;
     subcontrol-origin: margin;
 }
+
 QScrollBar::sub-line:horizontal {
     width: 1px;
     subcontrol-position: left;
     subcontrol-origin: margin;
 }
-/*QScrollBar:left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
-    width: 3px;
-    height: 3px;
-    background: #31394E;
-}*/
+
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
-
 
 QPushButton{
     background-color: rgb(43, 65, 77);
@@ -233,15 +223,15 @@ QPushButton:disabled{
 }
 
 QPushButton#checkable{
-    background-color: rgba(0, 82, 112, 255));
+    background-color: rgb(0, 82, 112);
     border: none;
     color: white;
 }
 
 QPushButton#checkable:hover{
-    background-color: rgba(0, 211, 197, 255);
+    background-color: rgb(0, 211, 197);
     color: white;
-    border-left: 5px solid rgba(0, 211, 197, 255);
+    border-left: 5px solid rgb(0, 211, 197);
 }
 
 QPushButton#checkable:checked{
@@ -265,11 +255,10 @@ QLabel{
     qproperty-alignment: AlignCenter;
 }
 
-
 QGroupBox {
     background-color: rgba(0, 211, 197, 255);
     border: rgba(0, 82, 112, 255);
-    margin-top: 5px;  /*leave space at the top for the title */
+    margin-top: 5px;
 }
 
 QGroupBox::title {
@@ -295,8 +284,8 @@ QToolButton:disabled{
     border: 1px;
 }
 
-QToolButton[popupMode="1"] { /* only for MenuButtonPopup */
-    padding-right: 0px; /* make way for the popup button */
+QToolButton[popupMode="1"] {
+    padding-right: 0px;
 }
 
 QToolButton::menu-button {
@@ -311,13 +300,12 @@ QToolButton::menu-indicator {
     image: none;
 }
 
-QToolButton:open { /* when the button has its menu open */
+QToolButton:open {
     background-color: rgb(0, 82, 112);
 }
 
-
 QDialog{
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 82, 112, 255), stop:0.5 rgba(0, 211, 197, 255), stop:1 rgba(0, 82, 112, 255));
+    background-color: rgba(0, 82, 112, 255)
 }
 
 QDialog QFrame#TitleBar{

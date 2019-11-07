@@ -47,3 +47,35 @@ include(core/core.pri)
 
 RESOURCES += \
     res.qrc
+
+DEPENDPATH += .
+INCLUDEPATH += .
+
+# build dir
+BuildDir =build_$$QT_VERSION
+
+CONFIG(debug, debug|release) {
+    DESTDIR = $$PWD/$$BuildDir/debug
+    OBJECTS_DIR = $$PWD/$$BuildDir/debug/.obj
+    MOC_DIR = $$PWD/$$BuildDir/debug/.moc
+    RCC_DIR = $$PWD/$$BuildDir/debug/.rcc
+    UI_DIR = $$PWD/$$BuildDir/debug/.ui
+} else {
+    DESTDIR = $$PWD/$$BuildDir/release
+    OBJECTS_DIR = $$PWD/$$BuildDir/release/.obj
+    MOC_DIR = $$PWD/$$BuildDir/release/.moc
+    RCC_DIR = $$PWD/$$BuildDir/release/.rcc
+    UI_DIR = $$PWD/$$BuildDir/release/.ui
+}
+
+## QT4.8 applciation icon
+#contains(QT_MAJOR_VERSION, 4){
+#    win32{
+#        RC_FILE = logo.rc
+#    }
+#}
+
+# QT5 applciation icon
+contains(QT_MAJOR_VERSION, 5){
+    RC_ICONS = "res/logo.ico"
+}

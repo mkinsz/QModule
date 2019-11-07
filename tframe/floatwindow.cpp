@@ -5,7 +5,9 @@
 
 FloatWindow::FloatWindow(QWidget *parent) : CMoveableWindow(parent)
 {
-
+    initData();
+    initUI();
+    initConnect();
 }
 
 void FloatWindow::initData()
@@ -17,7 +19,8 @@ void FloatWindow::initUI()
 {
     setWindowFlags(Qt::FramelessWindowHint);
     setWindowFlags(Qt::ToolTip);
-    setObjectName("CFloatWindow");
+    setObjectName("FloatWindow");
+    hide();
 }
 
 void FloatWindow::initConnect()

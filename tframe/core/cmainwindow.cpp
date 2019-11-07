@@ -34,7 +34,9 @@ void CMainWindow::initData()
 
 void CMainWindow::initUI()
 {
-    setObjectName(QString("CMainWindow"));
+    setWindowTitle("T-Frame");
+    setObjectName("CMainWindow");
+    setWindowFlags(Qt::FramelessWindowHint);
     QScreen* pScreen = qApp->primaryScreen();
     setMaximumSize(pScreen->availableGeometry().size());
     readSettings();
@@ -45,8 +47,7 @@ void CMainWindow::initUI()
 
     m_pLayout->setMargin(0);
     m_pLayout->setSpacing(0);
-    setWindowFlags(Qt::FramelessWindowHint);
-    setWindowTitle("QFramer");
+
 
     m_pTrayIcon = new QSystemTrayIcon(QIcon(":/res/logo.ico"), this);
     m_pTrayIcon->setObjectName("trayicon");

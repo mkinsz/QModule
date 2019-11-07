@@ -45,91 +45,33 @@ void CCenterWindow::setAlignment(EDIR_ALIGNMENT direction)
 {
     switch (direction) {
     case TopLeft:
-        m_pNavigation->setObjectName(QString("nav_bottom"));
-        m_pNavigation->setAlignTopLeft();
-        m_pNavigation->resize(QSize(m_pStacked->width(), m_pNavigation->height()));
-        m_pNavigation->adjustSize();
-        swicthLayout(QBoxLayout::TopToBottom);
-        break;
     case TopCenter:
-        m_pNavigation->setObjectName(QString("nav_bottom"));
-        m_pNavigation->setAlignTopCenter();
-        m_pNavigation->resize(QSize(m_pStacked->width(), m_pNavigation->height()));
-        m_pNavigation->adjustSize();
-
-        swicthLayout(QBoxLayout::TopToBottom);
-        break;
     case TopRight:
-        m_pNavigation->setObjectName(QString("nav_bottom"));
-        m_pNavigation->setAlignTopRight();
-        m_pNavigation->resize(QSize(m_pStacked->width(), m_pNavigation->height()));
-        m_pNavigation->adjustSize();
+        m_pNavigation->setHAlign(direction);
         swicthLayout(QBoxLayout::TopToBottom);
         break;
     case RightTop:
-        m_pNavigation->setObjectName(QString("nav_left"));
-        m_pNavigation->setAlignRightTop();
-        m_pNavigation->resize(QSize(m_pNavigation->width(), m_pStacked->height()));
-        m_pNavigation->adjustSize();
-        swicthLayout(QBoxLayout::RightToLeft);
-        break;
     case RightCenter:
-        m_pNavigation->setObjectName(QString("nav_left"));
-        m_pNavigation->setAlignRightCenter();
-        m_pNavigation->resize(QSize(m_pNavigation->width(), m_pStacked->height()));
-        m_pNavigation->adjustSize();
-        swicthLayout(QBoxLayout::RightToLeft);
-        break;
     case RightBottom:
-        m_pNavigation->setObjectName(QString("nav_left"));
-        m_pNavigation->setAlignRightBottom();
-        m_pNavigation->resize(QSize(m_pNavigation->width(), m_pStacked->height()));
-        m_pNavigation->adjustSize();
+        m_pNavigation->setVAlign(direction);
         swicthLayout(QBoxLayout::RightToLeft);
         break;
     case BottomRight:
-        m_pNavigation->setObjectName(QString("nav_top"));
-        m_pNavigation->setAlignBottomRight();
-        m_pNavigation->resize(QSize(m_pStacked->width(), m_pNavigation->height()));
-        m_pNavigation->adjustSize();
-        swicthLayout(QBoxLayout::BottomToTop);
-        break;
     case BottomCenter:
-        m_pNavigation->setObjectName(QString("nav_top"));
-        m_pNavigation->setAlignBottomCenter();
-        m_pNavigation->resize(QSize(m_pStacked->width(), m_pNavigation->height()));
-        m_pNavigation->adjustSize();
-        swicthLayout(QBoxLayout::BottomToTop);
-        break;
     case BottomLeft:
-        m_pNavigation->setObjectName(QString("nav_top"));
-        m_pNavigation->setAlignBottomLeft();
-        m_pNavigation->resize(QSize(m_pStacked->width(), m_pNavigation->height()));
-        m_pNavigation->adjustSize();
+        m_pNavigation->setHAlign(direction);
         swicthLayout(QBoxLayout::BottomToTop);
         break;
     case LeftBottom:
-        m_pNavigation->setObjectName(QString("nav_right"));
-        m_pNavigation->setAlignLeftBottom();
-        m_pNavigation->resize(QSize(m_pNavigation->width(), m_pStacked->height()));
-        m_pNavigation->adjustSize();
-        swicthLayout(QBoxLayout::LeftToRight);
-        break;
     case LeftCenter:
-        m_pNavigation->setObjectName(QString("nav_right"));
-        m_pNavigation->setAlignLeftCenter();
-        m_pNavigation->resize(QSize(m_pNavigation->width(), m_pStacked->height()));
-        m_pNavigation->adjustSize();
-        swicthLayout(QBoxLayout::LeftToRight);
-        break;
     case LeftTop:
-        m_pNavigation->setObjectName(QString("nav_right"));
-        m_pNavigation->setAlignLeftTop();
-        m_pNavigation->resize(QSize(m_pNavigation->width(), m_pStacked->height()));
-        m_pNavigation->adjustSize();
+        m_pNavigation->setVAlign(direction);
         swicthLayout(QBoxLayout::LeftToRight);
         break;
     }
+
+    m_pNavigation->resize(m_pStacked->width(), m_pNavigation->height());
+    m_pNavigation->adjustSize();
 }
 
 void CCenterWindow::initConnect()

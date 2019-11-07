@@ -87,13 +87,13 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 
 void MainWindow::showEvent(QShowEvent *event)
 {
-    m_pFloat->setVisible(true);
+//    m_pFloat->setVisible(true);
     event->accept();
 }
 
 void MainWindow::hideEvent(QHideEvent *event)
 {
-    m_pFloat->setVisible(false);
+//    m_pFloat->setVisible(false);
     event->accept();
 }
 

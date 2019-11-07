@@ -2,6 +2,7 @@
 #define CNAVIGATIONBAR_H
 
 #include <QFrame>
+#include "ccenterwindow.h"
 
 class QPushButton;
 class QHBoxLayout;
@@ -19,18 +20,9 @@ public:
     int count();
     void setCurrentIndex(int index);
     void addNavigationTile(const QString& tile, const QString &objectName);
-    void setAlignTopLeft();
-    void setAlignTopCenter();
-    void setAlignTopRight();
-    void setAlignBottomLeft();
-    void setAlignBottomCenter();
-    void setAlignBottomRight();
-    void setAlignLeftTop();
-    void setAlignLeftCenter();
-    void setAlignLeftBottom();
-    void setAlignRightTop();
-    void setAlignRightCenter();
-    void setAlignRightBottom();
+
+    void setHAlign(CCenterWindow::EDIR_ALIGNMENT direct);
+    void setVAlign(CCenterWindow::EDIR_ALIGNMENT direct);
 
 signals:
     void indexChanged(int i);
@@ -39,21 +31,12 @@ private slots:
     void setButtonChecked();
 
 public:
+    QStringList m_names;
     QList<QPushButton*> m_buttons;
 
 private:
-    QHBoxLayout* m_topLeft = nullptr;
-    QHBoxLayout* m_topCenter = nullptr;
-    QHBoxLayout* m_topRight = nullptr;
-    QHBoxLayout* m_bottomLeft = nullptr;
-    QHBoxLayout* m_bottomCenter = nullptr;
-    QHBoxLayout* m_bottomRight = nullptr;
-    QVBoxLayout* m_leftTop = nullptr;
-    QVBoxLayout* m_leftCenter = nullptr;
-    QVBoxLayout* m_leftBottom = nullptr;
-    QVBoxLayout* m_rightTop = nullptr;
-    QVBoxLayout* m_rightCenter = nullptr;
-    QVBoxLayout* m_rightBottom = nullptr;
+    QHBoxLayout* m_hLayout = nullptr;
+    QVBoxLayout* m_vLayout = nullptr;
 
     int m_index;
 };

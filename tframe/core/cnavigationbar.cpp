@@ -23,181 +23,86 @@ void CNavigationBar::initUI()
 
 void CNavigationBar::initConnect()
 {
-    for(auto item : m_buttons)
-        connect(item, SIGNAL(clicked()), this, SLOT(setButtonChecked()));
+
 }
 
 void CNavigationBar::addNavigationTile(const QString &tile, const QString &objectName)
 {
+    m_names << tile;
     QPushButton* button = new QPushButton(tile);
     button->setFlat(true);
     button->setCheckable(true);
     button->setFixedSize(80, 60);
     button->setFocusPolicy(Qt::NoFocus);
-    m_buttons.append(button);
     button->setObjectName(objectName);
+    m_buttons.append(button);
     connect(button, SIGNAL(clicked()), this, SLOT(setButtonChecked()));
 }
 
-void CNavigationBar::setAlignTopLeft()
+void CNavigationBar::setVAlign(CCenterWindow::EDIR_ALIGNMENT direct)
 {
-    if(!m_topLeft)
-        m_topLeft = new QHBoxLayout(this);
-    for(auto item : m_buttons)
-        m_topLeft->addWidget(item);
+    m_vLayout = new QVBoxLayout(this);
+    m_vLayout->setMargin(0);
+    m_vLayout->setSpacing(0);
+    setLayout(m_vLayout);
 
-    m_topLeft->addStretch();
-    m_topLeft->setMargin(0);
-    m_topLeft->setSpacing(0);
-    setLayout(m_topLeft);
+    switch (direct) {
+    case CCenterWindow::LeftTop:
+    case CCenterWindow::RightTop:
+        for(auto item : m_buttons)
+            m_vLayout->addWidget(item);
+        m_vLayout->addStretch();
+        break;
+
+    case CCenterWindow::LeftCenter:
+    case CCenterWindow::RightCenter:
+        m_vLayout->addStretch();
+        for(auto item : m_buttons)
+            m_vLayout->addWidget(item);
+        m_vLayout->addStretch();
+        break;
+
+    case CCenterWindow::LeftBottom:
+    case CCenterWindow::RightBottom:
+        m_vLayout->addStretch();
+        for(auto item : m_buttons)
+            m_vLayout->addWidget(item);
+        break;
+    default:;
+    }
 }
 
-void CNavigationBar::setAlignTopCenter()
+void CNavigationBar::setHAlign(CCenterWindow::EDIR_ALIGNMENT direct)
 {
-    if(!m_topCenter)
-        m_topCenter = new QHBoxLayout(this);
-    m_topCenter->addStretch();
-    for(auto item : m_buttons)
-        m_topCenter->addWidget(item);
+    m_hLayout = new QHBoxLayout(this);
+    m_hLayout->setMargin(0);
+    m_hLayout->setSpacing(0);
+    setLayout(m_hLayout);
 
-    m_topCenter->addStretch();
-    m_topCenter->setMargin(0);
-    m_topCenter->setSpacing(0);
-    setLayout(m_topCenter);
-}
+    switch (direct) {
+    case CCenterWindow::TopLeft:
+    case CCenterWindow::BottomRight:
+        for(auto item : m_buttons)
+            m_hLayout->addWidget(item);
+        m_hLayout->addStretch();
+        break;
 
-void CNavigationBar::setAlignTopRight()
-{
-    if(!m_topRight)
-        m_topRight = new QHBoxLayout(this);
-    m_topRight->addStretch();
-    for(auto item : m_buttons)
-        m_topRight->addWidget(item);
+    case CCenterWindow::TopCenter:
+    case CCenterWindow::BottomCenter:
+        m_hLayout->addStretch();
+        for(auto item : m_buttons)
+            m_hLayout->addWidget(item);
+        m_hLayout->addStretch();
+        break;
 
-    m_topRight->setMargin(0);
-    m_topRight->setSpacing(0);
-    setLayout(m_topRight);
-}
-
-
-void CNavigationBar::setAlignBottomLeft()
-{
-    if(!m_bottomLeft)
-        m_bottomLeft = new QHBoxLayout;
-    for(auto item : m_buttons)
-        m_bottomLeft->addWidget(item);
-
-    m_bottomLeft->addStretch();
-    m_bottomLeft->setMargin(0);
-    m_bottomLeft->setSpacing(0);
-    setLayout(m_bottomLeft);
-}
-
-
-void CNavigationBar::setAlignBottomCenter()
-{
-    if(!m_bottomCenter)
-        m_bottomCenter = new QHBoxLayout;
-    m_bottomCenter->addStretch();
-    for(auto item : m_buttons)
-        m_bottomCenter->addWidget(item);
-
-    m_bottomCenter->addStretch();
-    m_bottomCenter->setMargin(0);
-    m_bottomCenter->setSpacing(0);
-    setLayout(m_bottomCenter);
-}
-
-void CNavigationBar::setAlignBottomRight()
-{
-    if(!m_bottomRight)
-        m_bottomRight = new QHBoxLayout(this);
-    m_bottomRight->addStretch();
-    for(auto item : m_buttons)
-        m_bottomRight->addWidget(item);
-
-    m_bottomRight->setMargin(0);
-    m_bottomRight->setSpacing(0);
-    setLayout(m_bottomRight);
-}
-
-void CNavigationBar::setAlignLeftTop()
-{
-    if(!m_leftTop)
-        m_leftTop = new QVBoxLayout(this);
-    for(auto item : m_buttons)
-        m_leftTop->addWidget(item);
-
-    m_leftTop->addStretch();
-    m_leftTop->setMargin(0);
-    m_leftTop->setSpacing(0);
-    setLayout(m_leftTop);
-}
-
-void CNavigationBar::setAlignLeftCenter()
-{
-    if(!m_leftCenter)
-        m_leftCenter = new QVBoxLayout(this);
-    m_leftCenter->addStretch();
-    for(auto item : m_buttons)
-        m_leftCenter->addWidget(item);
-
-    m_leftCenter->addStretch();
-    m_leftCenter->setMargin(0);
-    m_leftCenter->setSpacing(0);
-    setLayout(m_leftCenter);
-}
-
-void CNavigationBar::setAlignLeftBottom()
-{
-    if(!m_leftBottom)
-        m_leftBottom = new QVBoxLayout(this);
-    m_leftBottom->addStretch();
-    for(auto item : m_buttons)
-        m_leftBottom->addWidget(item);
-
-    m_leftBottom->setMargin(0);
-    m_leftBottom->setSpacing(0);
-    setLayout(m_leftBottom);
-}
-
-void CNavigationBar::setAlignRightTop()
-{
-    if(!m_rightTop)
-        m_rightTop = new QVBoxLayout(this);
-    for(auto item : m_buttons)
-        m_rightTop->addWidget(item);
-
-    m_rightTop->addStretch();
-    m_rightTop->setMargin(0);
-    m_rightTop->setSpacing(0);
-    setLayout(m_rightTop);
-}
-
-void CNavigationBar::setAlignRightCenter()
-{
-    if(!m_rightCenter)
-        m_rightCenter = new QVBoxLayout(this);
-    m_rightCenter->addStretch();
-    for(auto item : m_buttons)
-        m_rightCenter->addWidget(item);
-
-    m_rightCenter->addStretch();
-    m_rightCenter->setMargin(0);
-    m_rightCenter->setSpacing(0);
-    setLayout(m_rightCenter);
-}
-
-void CNavigationBar::setAlignRightBottom()
-{
-    m_rightBottom = new QVBoxLayout;
-    m_rightBottom->addStretch();
-    for(auto item : m_buttons)
-        m_rightBottom->addWidget(item);
-
-    m_rightBottom->setMargin(0);
-    m_rightBottom->setSpacing(0);
-    setLayout(m_rightBottom);
+    case CCenterWindow::TopRight:
+    case CCenterWindow::BottomLeft:
+        m_hLayout->addStretch();
+        for(auto item : m_buttons)
+            m_hLayout->addWidget(item);
+        break;
+    default:;
+    }
 }
 
 int CNavigationBar::currentIndex()
