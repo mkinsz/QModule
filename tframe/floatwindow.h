@@ -20,8 +20,8 @@ protected:
 
 private:
     void initData();
-    void initUI();
-    void initConnect();
+    void initUi();
+    void initEvt();
 
 private:
     int m_width;

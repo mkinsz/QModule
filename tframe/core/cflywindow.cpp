@@ -14,8 +14,8 @@ CFlyWindow::CFlyWindow(QWidget *parent) : QWidget(parent)
     setWindowFlags(Qt::ToolTip);
 
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
 }
 
 void CFlyWindow::initData()
@@ -23,13 +23,13 @@ void CFlyWindow::initData()
     m_Pixmap.load(":/res/float.png");
 }
 
-void CFlyWindow::initUI()
+void CFlyWindow::initUi()
 {
     resize(m_Pixmap.size());
     setMask(m_Pixmap.mask());
 }
 
-void CFlyWindow::initConnect()
+void CFlyWindow::initEvt()
 {
 
 }

@@ -14,8 +14,8 @@ public:
     explicit CNavigationBar(QWidget *parent = nullptr);
 
     void initData();
-    void initConnect();
-    void initUI();
+    void initEvt();
+    void initUi();
     int currentIndex();
     int count();
     void setCurrentIndex(int index);

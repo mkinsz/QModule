@@ -2,17 +2,19 @@
 #include <QFile>
 #include <QMenu>
 #include <QApplication>
+#include <QDebug>
 
 ThemeMenu::ThemeMenu(QWidget *parent) : QMenu(parent)
 {
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
 }
 
 void ThemeMenu::onTriggered(QAction *action)
 {
-    changeStyleFile(":/skin/" + action->text().toLower() + ".css");
+    changeStyleFile("E:/work/code/qmodule/tframe/skin/" + action->text().toLower() + ".css");
+//    changeStyleFile(":/skin/" + action->text().toLower() + ".css");
 }
 
 void ThemeMenu::initData()
@@ -20,7 +22,7 @@ void ThemeMenu::initData()
     m_names << "Black" << "White" << "Color";
 }
 
-void ThemeMenu::initUI()
+void ThemeMenu::initUi()
 {
     QActionGroup *pGroup = new QActionGroup(this);
     pGroup->setExclusive(true);
@@ -37,7 +39,7 @@ void ThemeMenu::initUI()
     changeStyleFile(":/skin/black.css");
 }
 
-void ThemeMenu::initConnect()
+void ThemeMenu::initEvt()
 {
     connect(this, &ThemeMenu::triggered, this, &ThemeMenu::onTriggered);
 }
@@ -46,9 +48,6 @@ void ThemeMenu::changeStyleFile(const QString &path)
 {
     QFile f(path);
     if (!f.open(QFile::ReadOnly)) return;
-
-    QString qss = QLatin1String(f.readAll());
+    qApp->setStyleSheet(QLatin1String(f.readAll()));
     f.close();
-
-    qApp->setStyleSheet(qss);
 }

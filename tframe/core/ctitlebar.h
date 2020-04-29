@@ -9,6 +9,7 @@
 
 class QMenu;
 class CToolButton;
+class QPushButton;
 class CTitleBar : public QFrame
 {
     Q_OBJECT
@@ -22,7 +23,7 @@ public:
     void setSettingMenu(QMenu* menu);
 
     void setLogoButton(const char *str, const char *objectName=nullptr);
-    CToolButton* getLogoButton();
+    QPushButton* getLogoButton();
     void setLogoButtonVisible(bool visible);
     bool isLogoButtonVisible();
 
@@ -75,8 +76,8 @@ public slots:
 
 private:
     void initData();
-    void initConnect();
-    void initUI();
+    void initEvt();
+    void initUi();
 
 private:
     QIcon* m_pLogoIcon;
@@ -88,7 +89,7 @@ private:
     QIcon* m_pCloseIcon;
     QLabel* m_pTitleLabel;
 
-    CToolButton* m_pLogoBtn;
+    QPushButton* m_pLogoBtn;
     CToolButton* m_pSettingBtn;
     CToolButton* m_pSkinBtn;
     CToolButton* m_pFixBtn;

@@ -16,8 +16,8 @@ public slots:
 
 private:
     void initData();
-    void initUI();
-    void initConnect();
+    void initUi();
+    void initEvt();
 
 private:
     QStringList     m_names;

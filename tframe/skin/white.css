@@ -1,23 +1,22 @@
-* {font-family: "Microsoft YaHei"; font-size: 15px;}
+*{font-family: "Microsoft YaHei"; font-size: 15px; color: #222222; outline:0px;}
 
 QMenu {
-    color: white;
-    background-color: rgb(40, 47, 63);
+    background-color: #EEEEEE;
     margin: 2px;
 }
 
 QMenu::item {
     height: 23px;
     padding: 0px 25px 0px 20px;
-    background: rgb(40, 47, 63);
+    background: #EEEEEE;
 }
 
 QMenu::item:selected {
-    background-color: rgb(69, 187, 217);
+    background-color: #DCDCDC;
 }
 
 QMenu::icon:checked {
-    background: rgb(63, 147, 168);
+    background: #DCDCDC;
     border: 1px inset gray;
     position: absolute;
     top: 1px;
@@ -28,7 +27,7 @@ QMenu::icon:checked {
 
 QMenu::item:disabled
 {
-    background-color: gray;
+    background-color: lightgray;
     border: 1px inset gray;
     position: absolute;
     top: 1px;
@@ -50,7 +49,6 @@ QMenu::indicator {
 }
 
 QComboBox{
-    color:white;
     background-color: rgb(0, 0, 64);
 }
 
@@ -70,14 +68,12 @@ QComboBox::drop-down {
 
 QComboBox QAbstractItemView {
     border: none;
-    color:white;
     background-color:rgb(47, 54, 65);
 }
 
 
 QComboBox QAbstractItemView::item{
     height: 40px;
-    color:white;
 }
 
 QComboBox QAbstractItemView::item:selected{
@@ -93,14 +89,12 @@ QComboBox:disabled{
 }
 
 QStatusBar {
-    color: white;
     background-color: rgb(0, 211, 197);
     border-top: 1px solid rgb(0, 82, 112);
 }
 
 QStatusBar QLabel{
     background-color: transparent;
-    color: black;
 }
 
 QSizeGrip {
@@ -145,7 +139,6 @@ QHeaderView{
 QHeaderView::section {
     background-color: rgb(0, 82, 112);
     border: none;
-    color: white;
     font-size: 16px;
     min-height: 25px;
     padding-left: 4px;
@@ -210,48 +203,18 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 QPushButton{
     background-color: rgb(43, 65, 77);
     border: none;
-    color: white;
 }
 
 QPushButton:pressed{
     background-color: rgb(50, 77, 92);
-    color: white;
 }
 
 QPushButton:disabled{
     background-color: gray;
 }
 
-QPushButton#checkable{
-    background-color: rgb(0, 82, 112);
-    border: none;
-    color: white;
-}
-
-QPushButton#checkable:hover{
-    background-color: rgb(0, 211, 197);
-    color: white;
-    border-left: 5px solid rgb(0, 211, 197);
-}
-
-QPushButton#checkable:checked{
-    background-color: rgb(0, 82, 112);
-    color: white;
-    border-left: 5px solid rgba(0, 211, 197, 255);
-}
-
-QPushButton#checkable:pressed{
-    background-color: rgb(0, 82, 112);
-    color: white;
-}
-
-QPushButton#checkable:disabled{
-    background-color: gray;
-}
-
 QLabel{
     background-color: transparent;
-    color: white;
     qproperty-alignment: AlignCenter;
 }
 
@@ -265,17 +228,14 @@ QGroupBox::title {
     subcontrol-origin: margin;
     subcontrol-position: top left;
     font-weight:  bold;
-    color:white;
 }
 
 QToolButton{
     background-color: transparent;
-    color: rgb(92, 113, 134);
 }
 
 QToolButton:hover{
     background-color: rgba(0, 82, 112, 255);
-    color: white;
     border: 1px;
 }
 
@@ -313,7 +273,6 @@ QDialog QFrame#TitleBar{
 }
 
 QDialog QLabel{
-    color: white;
     padding-left: 5px;
 }
 
@@ -328,7 +287,6 @@ QDialog QLineEdit {
 
 QDialog QToolButton{
     background-color: transparent;
-    color: white;
 }
 
 
@@ -365,7 +323,6 @@ QDialog QToolButton:open { /* when the button has its menu open */
 
 QDialog QToolButton#close{
     background-color: transparent;
-    color: white;
 }
 
 
@@ -376,7 +333,6 @@ QDialog QToolButton#close:hover{
 
 QDialog QToolButton#logo{
     background-color: transparent;
-    color: white;
     border: 1px;
 }
 
@@ -388,13 +344,11 @@ QDialog QToolButton#logo:hover{
 
 QDialog QLabel#TFrame{
     height: 132;
-    color: white;
     border-image: url(:/res/icon.png);
 }
 
 QDialog QTextEdit{
     background-color: transparent;
-    color:green;
     border: none;
 }
 
@@ -407,7 +361,6 @@ QDialog QTabBar::tab {
     border-right: 1px solid black;
     height: 25px;
     width: 120px;
-    color: white;
     background-color: rgba(0, 211, 197, 255);
 }
 

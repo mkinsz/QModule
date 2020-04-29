@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     qApp->setApplicationName("T-Frame");
     qApp->setWindowIcon(QIcon(":/res/logo.ico"));
 
-    MainWindow::getInstance()->show();
+    MainWindow::window()->show();
 
     return a.exec();
 }

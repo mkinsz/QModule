@@ -25,8 +25,8 @@ public:
     ~CMainWindow() override;
 
     void initData();
-    void initUI();
-    void initConnect();
+    void initUi();
+    void initEvt();
 
     QWidget *centralWidget();
     void setCentralWidget(QWidget* widget);

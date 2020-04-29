@@ -1,34 +1,28 @@
-* {font-family: "Microsoft YaHei"; font-size: 15px;}
+* {font-family: "Microsoft YaHei"; font-size: 15px; outline:0px; color:#DCDCDC;}
 
-CMainWindow{
-    background-color: rgb(0, 211, 197);
-/*    background-image: url(none);*/
+QWidget{
+    background-color: #444444;
     background-repeat:repeat-xy;
 }
 
-QFrame #FloatWindow{
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 82, 112, 255), stop:0.5 rgba(0, 211, 197, 255), stop:1 rgba(0, 82, 112, 255));
-}
-
-QWigdet{
-    background-color: transparent;
-}
-
-QMenu {
-    color: white;
-    background-color: qlineargradient(spread:pad, x1:-1, y1:0, x2:1 y2:0, stop:0 rgba(0, 211, 197, 255), stop:1 rgba(0, 82, 112, 255));
-    margin: 2px;
+QMenu,QMenuBar,QMenu:disabled,QMenuBar:disabled {
+    color:#DCDCDC;
+    background-color:#484848;
+    border:1px solid #242424;
+    margin: 0px;
 }
 
 QMenu::item {
     height: 23px;
-    padding: 0px 25px 0px 20px;
-    background: qlineargradient(spread:pad, x1:-1, y1:0, x2:1 y2:0, stop:0 rgba(0, 211, 197, 255), stop:1 rgba(0, 82, 112, 255));
+    padding:3px 20px;
+    background-color: #484848;
 }
 
-QMenu::item:selected {
-    background-color: rgb(69, 187, 217);
-    border-left: 5px solid rgb(0, 211, 197)
+QMenu::item:selected,QMenuBar::item:selected {
+    color:#DCDCDC;
+    border:0px solid #242424;
+    background:#646464;
+    border-left: 5px solid gray
 }
 
 QMenu::icon:checked {
@@ -222,18 +216,48 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
-QPushButton{
-    background-color: rgb(43, 65, 77);
+QPushButton {
+    border-style:none;
+    border:1px solid #242424;
+    color:#DCDCDC;
+    padding:5px;
+    min-height:15px;
+    border-radius:5px;
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #484848,stop:1 #383838);
+}
+
+QPushButton:flat {
+    border: none;
+    background: transparent
+}
+
+QPushButton:pressed:!flat {
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #484848,stop:1 #383838);
+}
+
+QPushButton:disabled:!flat {
+    background-color: gray;
+}
+
+QPushButton:hover:!flat {
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #646464,stop:1 #525252);
+}
+
+CNavigationBar .QPushButton{
+    border-radius: none;
+    min-height: 20px;
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #646464,stop:1 #525252);
     border: none;
     color: white;
 }
 
-QPushButton:pressed{
-    background-color: rgb(50, 77, 92);
-    color: white;
+CNavigationBar .QPushButton:hover, CNavigationBar .QPushButton:pressed, CNavigationBar .QPushButton:checked{
+    border-style:solid;
+    border-color:#00BB9E;
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #484848,stop:1 #383838);
 }
 
-QPushButton:disabled{
+CNavigationBar .QPushButton:disabled{
     background-color: gray;
 }
 

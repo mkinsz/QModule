@@ -8,8 +8,8 @@ CBaseDialog::CBaseDialog(QWidget *parent) : QDialog(parent)
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_DeleteOnClose);
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
 }
 
 void CBaseDialog::initData()
@@ -17,7 +17,7 @@ void CBaseDialog::initData()
 
 }
 
-void CBaseDialog::initUI()
+void CBaseDialog::initUi()
 {
     resize(0, 0);
     m_pTitleBar = new CTitleBar;
@@ -35,7 +35,7 @@ void CBaseDialog::initUI()
     setLayout(mainLayout);
 }
 
-void CBaseDialog::initConnect()
+void CBaseDialog::initEvt()
 {
 
 }

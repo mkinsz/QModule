@@ -43,8 +43,8 @@ public:
     explicit CCenterWindow(QWidget *parent = nullptr);
 
     void initData();
-    void initUI();
-    void initConnect();
+    void initUi();
+    void initEvt();
     void addWidget(const QString& tile, const QString &obejctName, QWidget* widget);
     void setAlignment(EDIR_ALIGNMENT direction);
     CNavigationBar* getNavigationBar();

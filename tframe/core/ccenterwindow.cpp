@@ -12,8 +12,8 @@
 CCenterWindow::CCenterWindow(QWidget *parent) : QWidget(parent)
 {
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
 }
 
 void CCenterWindow::initData()
@@ -21,7 +21,7 @@ void CCenterWindow::initData()
     m_preIndex = 0;
 }
 
-void CCenterWindow::initUI()
+void CCenterWindow::initUi()
 {
     setObjectName("CCenterWindow");
     m_pNavigation = new CNavigationBar(this);
@@ -74,7 +74,7 @@ void CCenterWindow::setAlignment(EDIR_ALIGNMENT direction)
     m_pNavigation->adjustSize();
 }
 
-void CCenterWindow::initConnect()
+void CCenterWindow::initEvt()
 {
     connect(m_pNavigation, SIGNAL(indexChanged(int)), this, SLOT(switchscreen(int)));
 }
@@ -93,51 +93,23 @@ CNavigationBar* CCenterWindow::getNavigationBar(){
 void CCenterWindow::switchscreen(const int index)
 {
     int n = 0;
-    if (index == m_pStacked->currentIndex())
-    {
-        return;
-    }
-    else if(index > m_pStacked->currentIndex())
-    {
-        n = 2;
-    }
-    else if (index < m_pStacked->currentIndex())
-    {
-        n = 6;
-    }
+    if (index == m_pStacked->currentIndex())     return;
+    else if(index > m_pStacked->currentIndex())  n = 2;
+    else if (index < m_pStacked->currentIndex()) n = 6;
 
     m_pStacked->setCurrentIndex(index);
 
     switch (n) {
-    case 0:
-        cloudAntimation(AnimationTop);
-        break;
-    case 1:
-        cloudAntimation(AnimationTopRight);
-        break;
-    case 2:
-        cloudAntimation(AnimationRight);
-        break;
-    case 3:
-        cloudAntimation(AnimationBottomRight);
-        break;
-    case 4:
-        cloudAntimation(AnimationBottom);
-        break;
-    case 5:
-        cloudAntimation(AnimationBottomLeft);
-        break;
-    case 6:
-        cloudAntimation(AnimationLeft);
-        break;
-    case 7:
-        cloudAntimation(AnimationTopLeft);
-        break;
-    case 8:
-        cloudAntimation(AnimationCenter);
-        break;
-    default:
-        break;
+    case 0: cloudAntimation(AnimationTop);      break;
+    case 1: cloudAntimation(AnimationTopRight); break;
+    case 2: cloudAntimation(AnimationRight);    break;
+    case 3: cloudAntimation(AnimationBottomRight); break;
+    case 4: cloudAntimation(AnimationBottom);   break;
+    case 5: cloudAntimation(AnimationBottomLeft); break;
+    case 6: cloudAntimation(AnimationLeft);     break;
+    case 7: cloudAntimation(AnimationTopLeft);  break;
+    case 8: cloudAntimation(AnimationCenter);   break;
+    default: break;
     }
     m_preIndex = index;
 
@@ -206,7 +178,7 @@ void CCenterWindow::cloudAntimation(EDIR_ANIMATION direction)
     animation->setEasingCurve(QEasingCurve::OutCubic);
 
     QPropertyAnimation* animation_opacity = new QPropertyAnimation(circle, "windowOpacity");
-    animation_opacity->setDuration(1000);
+    animation_opacity->setDuration(500);
     animation_opacity->setStartValue(1);
     animation_opacity->setEndValue(0);
     animation_opacity->setEasingCurve(QEasingCurve::OutCubic);

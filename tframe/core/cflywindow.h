@@ -11,8 +11,8 @@ public:
     explicit CFlyWindow(QWidget *parent = nullptr);
 
     void initData();
-    void initUI();
-    void initConnect();
+    void initUi();
+    void initEvt();
     void setMenu(QMenu* menu);
 
 signals:

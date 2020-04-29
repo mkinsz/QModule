@@ -52,20 +52,20 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # build dir
-BuildDir =build_$$QT_VERSION
+BUILD_PATH = build_$$QT_VERSION
 
 CONFIG(debug, debug|release) {
-    DESTDIR = $$PWD/$$BuildDir/debug
-    OBJECTS_DIR = $$PWD/$$BuildDir/debug/.obj
-    MOC_DIR = $$PWD/$$BuildDir/debug/.moc
-    RCC_DIR = $$PWD/$$BuildDir/debug/.rcc
-    UI_DIR = $$PWD/$$BuildDir/debug/.ui
+    DESTDIR = $$PWD/$$BUILD_PATH/debug
+    OBJECTS_DIR = $$PWD/$$BUILD_PATH/debug/.obj
+    MOC_DIR = $$PWD/$$BUILD_PATH/debug/.moc
+    RCC_DIR = $$PWD/$$BUILD_PATH/debug/.rcc
+    UI_DIR = $$PWD/$$BUILD_PATH/debug/.ui
 } else {
-    DESTDIR = $$PWD/$$BuildDir/release
-    OBJECTS_DIR = $$PWD/$$BuildDir/release/.obj
-    MOC_DIR = $$PWD/$$BuildDir/release/.moc
-    RCC_DIR = $$PWD/$$BuildDir/release/.rcc
-    UI_DIR = $$PWD/$$BuildDir/release/.ui
+    DESTDIR = $$PWD/$$BUILD_PATH/release
+    OBJECTS_DIR = $$PWD/$$BUILD_PATH/release/.obj
+    MOC_DIR = $$PWD/$$BUILD_PATH/release/.moc
+    RCC_DIR = $$PWD/$$BUILD_PATH/release/.rcc
+    UI_DIR = $$PWD/$$BUILD_PATH/release/.ui
 }
 
 ## QT4.8 applciation icon

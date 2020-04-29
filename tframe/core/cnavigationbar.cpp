@@ -7,8 +7,8 @@
 CNavigationBar::CNavigationBar(QWidget *parent) : QFrame(parent)
 {
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
 }
 
 void CNavigationBar::initData()
@@ -16,12 +16,12 @@ void CNavigationBar::initData()
     m_index = 0;
 }
 
-void CNavigationBar::initUI()
+void CNavigationBar::initUi()
 {
     setObjectName("CNavigationBar");
 }
 
-void CNavigationBar::initConnect()
+void CNavigationBar::initEvt()
 {
 
 }

@@ -13,7 +13,7 @@ class MainWindow : public CMainWindow
     Q_OBJECT
 
 public:
-    static MainWindow* getInstance();
+    static MainWindow* window();
     FloatWindow* getFloatWindow();
 
 protected:
@@ -26,8 +26,8 @@ protected:
 
 private:
     void initData();
-    void initUI();
-    void initConnect();
+    void initUi();
+    void initEvt();
 
 public:
     CenterWindow *m_pCenter = nullptr;

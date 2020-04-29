@@ -11,8 +11,8 @@ public:
     explicit CBaseDialog(QWidget *parent = nullptr);
 
     void initData();
-    void initUI();
-    void initConnect();
+    void initUi();
+    void initEvt();
 
 signals:
 

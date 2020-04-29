@@ -21,8 +21,8 @@ CMainWindow::CMainWindow(QWidget *parent)
     : QWidget(parent)
 {
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
 }
 
 void CMainWindow::initData()
@@ -32,7 +32,7 @@ void CMainWindow::initData()
     m_bLocked = false;
 }
 
-void CMainWindow::initUI()
+void CMainWindow::initUi()
 {
     setWindowTitle("T-Frame");
     setObjectName("CMainWindow");
@@ -59,7 +59,7 @@ void CMainWindow::initUI()
 }
 
 
-void CMainWindow::initConnect( )
+void CMainWindow::initEvt( )
 {
     connect(m_pTitleBar, SIGNAL(minimuned()), this, SIGNAL(Hidden()));
     connect(m_pTitleBar, SIGNAL(closed()), this, SIGNAL(Hidden()));

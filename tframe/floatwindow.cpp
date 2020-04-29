@@ -6,8 +6,8 @@
 FloatWindow::FloatWindow(QWidget *parent) : CMoveableWindow(parent)
 {
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
 }
 
 void FloatWindow::initData()
@@ -15,7 +15,7 @@ void FloatWindow::initData()
     m_width = 200;
 }
 
-void FloatWindow::initUI()
+void FloatWindow::initUi()
 {
     setWindowFlags(Qt::FramelessWindowHint);
     setWindowFlags(Qt::ToolTip);
@@ -23,16 +23,16 @@ void FloatWindow::initUI()
     hide();
 }
 
-void FloatWindow::initConnect()
+void FloatWindow::initEvt()
 {
 
 }
 
 void FloatWindow::showEvent(QShowEvent *event)
 {
-    move(MainWindow::getInstance()->x()+ MainWindow::getInstance()->width() + 2,\
-         MainWindow::getInstance()->y());
-    resize(m_width, MainWindow::getInstance()->height());
+    move(MainWindow::window()->x()+ MainWindow::window()->width() + 2,\
+         MainWindow::window()->y());
+    resize(m_width, MainWindow::window()->height());
     QWidget::showEvent(event);
 }
 

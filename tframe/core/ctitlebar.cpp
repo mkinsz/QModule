@@ -2,13 +2,14 @@
 #include "ctoolbutton.h"
 #include <QHBoxLayout>
 #include <QMenu>
+#include <QPushButton>
 
 CTitleBar::CTitleBar(QWidget *parent) :
     QFrame(parent)
 {
     initData();
-    initUI();
-    initConnect();
+    initUi();
+    initEvt();
     m_pFixBtn->click();
 }
 
@@ -27,7 +28,7 @@ CTitleBar::~CTitleBar()
 
 void CTitleBar::initData()
 {
-    m_pLogoBtn = new CToolButton(this);
+    m_pLogoBtn = new QPushButton(this);
     m_pTitleLabel = new QLabel(this);
     m_pSettingBtn = new CToolButton(this);
     m_pSettingBtn->setFocusPolicy(Qt::NoFocus);
@@ -52,11 +53,11 @@ void CTitleBar::initData()
     m_pNormalIcon =  new QIcon(":/skin/icon/dark/full.png");
 }
 
-void CTitleBar::initUI()
+void CTitleBar::initUi()
 {
     setTitleBarHeight(Title_Height);
     setObjectName("CTitleBar");
-    setLogoButton(":/res/icon.png");
+    setLogoButton(":/res/icon.png", "LogoButton");
     setTitleLabel("T-Frame", "CTitleLabel");
     setSettingButton(":/skin/icon/dark/down.png");
     setSkinButton(":/skin/icon/dark/clothes.png");
@@ -80,7 +81,7 @@ void CTitleBar::initUI()
     setLayout(mainlayout);
 }
 
-void CTitleBar::initConnect()
+void CTitleBar::initEvt()
 {
     connect(m_pSettingBtn, SIGNAL(clicked()), m_pSettingBtn, SLOT(showMenu()));
     connect(m_pSkinBtn, SIGNAL(clicked()), m_pSkinBtn, SLOT(showMenu()));
@@ -142,13 +143,14 @@ void CTitleBar::setTitleBarHeight(int height)
 
 void CTitleBar::setLogoButton(const char *str, const char *objectName)
 {
+    m_pLogoBtn->setFlat(true);
     m_pLogoBtn->setIcon(QIcon(str));
     m_pLogoBtn->setIconSize(QSize(height(), height()));
     if(objectName)
         m_pLogoBtn->setObjectName(objectName);
 }
 
-CToolButton* CTitleBar::getLogoButton()
+QPushButton* CTitleBar::getLogoButton()
 {
     return m_pLogoBtn;
 }
