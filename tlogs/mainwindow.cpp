@@ -156,8 +156,6 @@ void MainWindow::connected()
     obj["timestamp"] = "0";
     send("/mpuapi/v1r2/author/token", obj);
     m_tid = startTimer(5000);
-
-    query();
 }
 
 void MainWindow::handleClick()
@@ -249,6 +247,8 @@ void MainWindow::handleTokenAck(const QJsonObject &json) {
 void MainWindow::handleLoginAck(const QJsonObject &json) {
     QJsonDocument doc(json);
     qDebug() << QString::fromUtf8(doc.toJson()).constData();
+
+    query();
 }
 
 void MainWindow::handleAliveAck(const QJsonObject &json) {
