@@ -44,7 +44,6 @@ void loadFonts(QApplication& app) {
 
     QStringList preferList;
     preferList.append("Microsoft YaHei");
-    //    preferList.append("微软雅黑");
     preferList.append("SimSong");
     preferList.append("宋体");
     preferList.append("WenQuanYi Micro Hei");

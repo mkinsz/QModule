@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>style.css</file>
+        <file>res/play.png</file>
+        <file>res/pause.png</file>
+        <file>res/folder.png</file>
+        <file>res/close.png</file>
+        <file>res/delete.png</file>
+        <file>res/settings.png</file>
+        <file>res/clear.png</file>
+        <file>res/search.png</file>
+    </qresource>
+</RCC>
