@@ -24,8 +24,7 @@ IpEdit::IpEdit(QWidget *parent) : QWidget(parent)
         m_pSpinBox[i]->installEventFilter(this);
         m_pLayout->addWidget(m_pSpinBox[i]);
 
-        if (i == 3)
-            continue;
+        if (i == 3) continue;
 
         QLabel *pLabel = new QLabel("·", this);
         pLabel->setFixedWidth(10);
