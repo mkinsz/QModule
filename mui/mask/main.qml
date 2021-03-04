@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
-import QtGraphicalEffects 1.13
+import QtGraphicalEffects 1.12
 
 import Material.Core 1.0
 

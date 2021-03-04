@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/qss/black.css</file>
+        <file>res/lan/qt_zh_CN.qm</file>
+        <file>res/img/logo.ico</file>
+        <file>res/font/fontawesome-webfont.ttf</file>
+        <file>res/img/add_bottom.png</file>
+        <file>res/img/add_left.png</file>
+        <file>res/img/add_right.png</file>
+        <file>res/img/add_top.png</file>
+        <file>res/img/btn_close.png</file>
+        <file>res/img/btn_ok.png</file>
+        <file>res/img/checkbox_checked.png</file>
+        <file>res/img/checkbox_unchecked.png</file>
+        <file>res/img/close.png</file>
+        <file>res/img/msg_error.png</file>
+        <file>res/img/msg_info.png</file>
+        <file>res/img/msg_question.png</file>
+        <file>res/img/open.png</file>
+        <file>res/img/radio_normal.png</file>
+        <file>res/img/radio_selected.png</file>
+    </qresource>
+</RCC>
