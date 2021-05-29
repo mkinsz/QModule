@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QFile>
 #include <QDebug>
+#include <QPainterPath>
 #include <QDomDocument>
 
 NavDelegate::NavDelegate(QObject *parent) : QStyledItemDelegate(parent)

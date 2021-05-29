@@ -2,6 +2,7 @@
 #include "treemodel.h"
 #include <QStringList>
 #include <QIcon>
+#include <QFile>
 #include <QDomDocument>
 
 static QList<TreeData> parse(QString file_name)

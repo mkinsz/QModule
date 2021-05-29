@@ -16,9 +16,15 @@ QtObject {
     readonly property int smallSize: 10
     readonly property int largeSize: 16
 
-    property font font
-    font.bold: true
-    font.underline: false
-    font.pixelSize: 14
-    font.family: "arial"
+    property font font : {
+        bold: true
+        underline: false
+        pixelSize: 14
+        family: "arial"
+    }
+
+//    font.bold: true
+//    font.underline: false
+//    font.pixelSize: 14
+//    font.family: "arial"
 }

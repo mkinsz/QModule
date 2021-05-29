@@ -1,6 +1,9 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    mask \
-    mt \
-    wipe
+    apps \
+    dockpro \
+    docks \
+    example \
+    go2d \
+    plugins

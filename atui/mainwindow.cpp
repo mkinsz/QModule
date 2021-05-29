@@ -14,6 +14,7 @@
 #include <QCloseEvent>
 #include <QQuickWidget>
 #include <QScreen>
+#include <QPainterPath>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
